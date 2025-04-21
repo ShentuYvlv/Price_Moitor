@@ -544,13 +544,167 @@ def fetch_market_data(exchange, symbol, timeframe='4h', limit=2):
             
         # 3. 获取持仓量
         try:
-            open_interest = exchange.fetch_open_interest(symbol)
-            if open_interest:
-                result['open_interest'] = open_interest.get('openInterest')
-                result['open_interest_amount'] = open_interest.get('openInterestAmount')
+            # 由于看到很多交易对的持仓量数据为null，我们直接优先使用Bybit的专用API
+            try:
+                # 直接使用Bybit API v5获取持仓量 - 作为首选方法
+                # 移除USDT:USDT后缀以匹配API格式
+                base_symbol = symbol.split(':')[0] if ':' in symbol else symbol
+                # 示例: BTC/USDT:USDT -> BTCUSDT
+                clean_symbol = base_symbol.replace('/', '')  # 移除/符号
+                
+                # 使用Bybit v5 API直接获取持仓量
+                endpoint = 'v5/market/open-interest'
+                params = {
+                    'category': 'linear',
+                    'symbol': clean_symbol,
+                    'intervalTime': '4h',
+                    'limit': 1
+                }
+                
+                try:
+                    # 尝试直接调用Bybit API
+                    response = exchange.public_get_market_open_interest(params)
+                    
+                    if response and 'result' in response and 'list' in response['result'] and len(response['result']['list']) > 0:
+                        data = response['result']['list'][0]
+                        if 'openInterest' in data and data['openInterest']:
+                            result['open_interest'] = float(data['openInterest'])
+                            
+                            # 如果API直接提供了时间戳
+                            if 'timestamp' in data:
+                                result['open_interest_timestamp'] = int(data['timestamp'])
+                            else:
+                                result['open_interest_timestamp'] = int(time.time() * 1000)
+                            
+                            # 如果API返回了价格，计算持仓量价值
+                            if 'price' in data and data['price']:
+                                current_price = float(data['price'])
+                                result['open_interest_amount'] = result['open_interest'] * current_price
+                            elif result['current_price'] is not None:
+                                # 使用已经获取的当前价格
+                                result['open_interest_amount'] = result['open_interest'] * result['current_price']
+                except Exception as e:
+                    # print(f"Bybit专用API获取{symbol}持仓量失败: {str(e)}")
+                    pass
+                
+                # 如果以上方法失败，则尝试通过公共endpoint获取
+                if result['open_interest'] is None:
+                    try:
+                        response = exchange.request(
+                            path=f'v5/market/open-interest',
+                            api='public',
+                            method='GET',
+                            params=params
+                        )
+                        
+                        if response and 'result' in response and 'list' in response['result'] and len(response['result']['list']) > 0:
+                            data = response['result']['list'][0]
+                            if 'openInterest' in data and data['openInterest']:
+                                result['open_interest'] = float(data['openInterest'])
+                                
+                                # 获取时间戳
+                                if 'timestamp' in data:
+                                    result['open_interest_timestamp'] = int(data['timestamp'])
+                                else:
+                                    result['open_interest_timestamp'] = int(time.time() * 1000)
+                                
+                                # 计算持仓量价值
+                                if 'price' in data and data['price']:
+                                    current_price = float(data['price'])
+                                    result['open_interest_amount'] = result['open_interest'] * current_price
+                                elif result['current_price'] is not None:
+                                    # 使用已经获取的当前价格
+                                    result['open_interest_amount'] = result['open_interest'] * result['current_price']
+                    except Exception as e:
+                        # print(f"Bybit公共API获取{symbol}持仓量失败: {str(e)}")
+                        pass
+            except Exception as e:
+                # print(f"Bybit特定API获取{symbol}持仓量出错: {str(e)}")
+                pass
+
+            # 如果上述Bybit特定方法失败，尝试标准CCXT方法
+            if result['open_interest'] is None:
+                try:
+                    # 方式1: 通过CCXT标准方法获取持仓量
+                    open_interest = exchange.fetch_open_interest(symbol)
+                    if open_interest and open_interest.get('openInterest') is not None:
+                        result['open_interest'] = open_interest.get('openInterest')
+                        result['open_interest_amount'] = open_interest.get('openInterestAmount')
+                        
+                        # 如果没有直接获取到持仓量价值，使用持仓量和当前价格计算
+                        if result['open_interest_amount'] is None and result['current_price'] is not None:
+                            result['open_interest_amount'] = result['open_interest'] * result['current_price']
+                        
+                        # 获取时间戳以便记录持仓量历史
+                        if 'timestamp' in open_interest:
+                            result['open_interest_timestamp'] = open_interest.get('timestamp')
+                        else:
+                            result['open_interest_timestamp'] = int(time.time() * 1000)
+                except Exception as e:
+                    # print(f"CCXT标准方法获取{symbol}持仓量失败: {str(e)}")
+                    pass
+                    
+            # 如果方式1失败，尝试方式2: 通过ticker获取持仓量
+            if result['open_interest'] is None:
+                try:
+                    ticker = exchange.fetch_ticker(symbol)
+                    if ticker and 'info' in ticker:
+                        info = ticker['info']
+                        if 'openInterest' in info and info['openInterest']:
+                            result['open_interest'] = float(info['openInterest'])
+                            # 尝试获取或计算持仓量价值
+                            if 'openInterestValue' in info:
+                                result['open_interest_amount'] = float(info['openInterestValue'])
+                            elif 'openInterestAmount' in info:
+                                result['open_interest_amount'] = float(info['openInterestAmount'])
+                            elif 'lastPrice' in info and info['lastPrice']:
+                                # 使用最新价格计算
+                                result['open_interest_amount'] = result['open_interest'] * float(info['lastPrice'])
+                            elif result['current_price'] is not None:
+                                # 使用已经获取的当前价格
+                                result['open_interest_amount'] = result['open_interest'] * result['current_price']
+                            
+                            result['open_interest_timestamp'] = int(time.time() * 1000)
+                except Exception as e:
+                    # print(f"Ticker方法获取{symbol}持仓量失败: {str(e)}")
+                    pass
+            
+            # 如果上述方法都失败，尝试方式4: 通过Tickers Bulk API
+            if result['open_interest'] is None and result['current_price'] is not None:
+                try:
+                    # 通过当前价格和交易量近似计算
+                    current_price = result['current_price']
+                    
+                    # 获取24小时成交量数据
+                    ticker_info = exchange.fetch_ticker(symbol)
+                    if ticker_info and ticker_info.get('quoteVolume') and ticker_info['quoteVolume'] > 0:
+                        # 在某些交易所中，持仓量与24小时成交量有一定关系
+                        # 这是一个近似值，不是准确的持仓量，但可以作为备选
+                        volume_24h = float(ticker_info['quoteVolume'])
+                        # 以成交量的一定比例作为持仓量的估计值（例如50%）
+                        estimated_oi_amount = volume_24h * 0.5
+                        result['open_interest_amount'] = estimated_oi_amount
+                        result['open_interest'] = estimated_oi_amount / current_price
+                        result['open_interest_timestamp'] = int(time.time() * 1000)
+                        result['open_interest_is_estimated'] = True  # 标记为估计值
+                except Exception as e:
+                    # print(f"估计{symbol}持仓量失败: {str(e)}")
+                    pass
+                    
+            # 在所有方法尝试后，如果仍然没有持仓量数据，可以添加一个标志
+            if result['open_interest'] is None:
+                result['open_interest_available'] = False
+            else:
+                result['open_interest_available'] = True
+                
+                # 确保持仓量价值正确计算
+                if result['open_interest_amount'] is None and result['current_price'] is not None:
+                    result['open_interest_amount'] = result['open_interest'] * result['current_price']
+                
         except Exception as e:
             # 持仓量获取失败不影响其他数据获取
-            pass
+            # print(f"获取{symbol}持仓量失败: {str(e)}")
+            result['open_interest_available'] = False
             
         return result
     except Exception as e:
