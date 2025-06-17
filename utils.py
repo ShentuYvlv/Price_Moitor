@@ -11,6 +11,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import traceback
 import pandas as pd
 import random
+import math
+import sys
 
 # 邮箱配置
 SMTP_SERVER = 'smtp.qq.com'
@@ -19,14 +21,342 @@ EMAIL_ADDRESS = '1833429505@qq.com'
 EMAIL_PASSWORD = 'igzowcjvsdkhehdh'
 RECIPIENT_EMAIL = '1833429505@qq.com'
 
+# 添加交易所API限制常量
+OKX_RATE_LIMIT = 20  # OKX每秒API请求限制
+OKX_RATE_LIMIT_RESET = 1.0  # OKX限制重置时间(秒)
+MAX_RETRY_ATTEMPTS = 3  # 最大重试次数
+
 def get_socks5_proxy():
     """获取SOCKS5代理配置"""
-    return {
-        'http': 'socks5://127.0.0.1:10808',
-        'https': 'socks5://127.0.0.1:10808'
-    }
+    try:
+        # 检查是否禁用代理
+        if os.environ.get('DISABLE_PROXY', '').lower() in ('true', '1', 'yes'):
+            print("代理已被环境变量禁用")
+            return None
+            
+        # 检查环境变量是否设置了代理
+        proxy_host = os.environ.get('SOCKS5_PROXY_HOST', '127.0.0.1')
+        proxy_port = os.environ.get('SOCKS5_PROXY_PORT', '10808')
+        
+        # 尝试使用环境变量，如果没有则使用默认值
+        proxy_url = f'socks5://{proxy_host}:{proxy_port}'
+        
+        # 尝试测试代理是否可用
+        try:
+            import socket
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(2)  # 设置2秒超时
+            
+            # 尝试连接到代理服务器
+            result = sock.connect_ex((proxy_host, int(proxy_port)))
+            sock.close()
+            
+            if result != 0:
+                print(f"警告：代理服务器不可达 ({proxy_host}:{proxy_port}), 错误代码: {result}")
+                return None
+                
+            print(f"代理服务器 {proxy_host}:{proxy_port} 连接测试成功")
+        except Exception as e:
+            print(f"测试代理时出错: {str(e)}")
+            return None
+            
+        return {
+            'http': proxy_url,
+            'https': proxy_url
+        }
+    except Exception as e:
+        print(f"获取代理配置时出错: {str(e)}")
+        return None
 
 def send_email(subject, content):
+    """发送邮件的函数"""
+    try:
+        html = '<html>'
+        html += '<head>'
+        html += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'
+        html += '<style>'
+        html += '''
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", Arial, sans-serif;
+                line-height: 1.4;
+                color: #333;
+                margin: 0;
+                padding: 10px;
+                background-color: #f5f5f5;
+                -webkit-text-size-adjust: 100%;
+            }
+            .container {
+                max-width: 100%;
+                width: 100%;
+                margin: 0 auto;
+                background-color: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+                overflow: hidden;
+            }
+            .header {
+                background-color: #1a73e8;
+                color: white;
+                padding: 16px 12px;
+                font-size: 18px;
+                font-weight: bold;
+                text-align: center;
+            }
+            .alert-box {
+                padding: 12px 10px;
+                line-height: 1.5;
+            }
+            .info-item {
+                margin: 10px 0;
+                padding: 10px;
+                background-color: #f8f9fa;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            }
+            .pair-box {
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                padding: 12px 10px;
+                margin: 8px 0;
+                background-color: white;
+                transition: all 0.2s ease;
+            }
+            .symbol {
+                font-size: 16px;
+                font-weight: bold;
+                color: #2c3e50;
+                margin-bottom: 8px;
+            }
+            .up {
+                color: #00c853;
+                font-weight: bold;
+            }
+            .down {
+                color: #ff1744;
+                font-weight: bold;
+            }
+            .change {
+                font-size: 13px;
+                color: #666;
+                margin-left: 4px;
+            }
+            .footer {
+                text-align: center;
+                padding: 12px;
+                color: #666;
+                font-size: 11px;
+                border-top: 1px solid #eee;
+                margin-top: 15px;
+            }
+            .volatility {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 8px;
+                margin-bottom: 10px;
+            }
+            @media (min-width: 428px) {
+                .volatility {
+                    flex-direction: row;
+                    gap: 15px;
+                }
+            }
+            .volatility-item {
+                padding: 8px 10px;
+                background-color: #f8f9fa;
+                border-radius: 6px;
+            }
+            .details-box {
+                border-top: 1px solid #eee;
+                padding-top: 8px;
+                margin-top: 8px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                grid-template-columns: repeat(3, 1fr); /* 一行三列 */
+            }
+            @media (max-width: 375px) {
+                .details-box {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .detail-item {
+                background-color: #f8f9fa;
+                padding: 4px 5px;
+                border-radius: 6px;
+                font-size: 13px;
+            }
+            .detail-label {
+                color: #666;
+                font-weight: normal;
+                display: block;
+                margin-bottom: 1px;
+            }
+            .detail-value {
+                font-weight: bold;
+                color: #2c3e50;
+                display: block;
+            }
+            .funding-positive {
+                color: #00c853;
+            }
+            .funding-negative {
+                color: #ff1744;
+            }
+        '''
+        html += '</style>'
+        html += '</head>'
+        html += '<body>'
+        html += '<div class="container">'
+        html += f'<div class="header">🔔 {subject}</div>'
+        html += '<div class="alert-box">'
+        
+        # 处理内容
+        current_symbol = None
+        details_section = False
+        pair_html = ""
+        
+        lines = content.strip().split('\n')
+        html += '<div class="info-item">'
+        
+        # 首先解析交易对和波动数据
+        i = 0
+        while i < len(lines):
+            line = lines[i].strip()
+            
+            # 跳过空行和标题行
+            if not line or i < 2:  # 跳过"发现大波动交易对:"和空行
+                i += 1
+                continue
+                
+            # 检查是否是新的交易对信息行
+            if ']:' in line or (': 上涨' in line and '下跌' in line):
+                # 如果已经有处理过的交易对，先保存之前的HTML
+                if current_symbol and pair_html:
+                    html += pair_html
+                    pair_html = ""
+                
+                # 解析交易对信息
+                if '[' in line and ']:' in line:
+                    symbol_part = line.split('[')[0].strip()
+                    source_part = line.split('[')[1].split(']')[0].strip()
+                    data_part = line.split(']:')[1].strip()
+                else:
+                    symbol_part = line.split(':')[0].strip()
+                    source_part = "未知"
+                    data_part = line.split(':')[1].strip()
+                
+                current_symbol = symbol_part
+                
+                pair_html = '<div class="pair-box">'
+                pair_html += f'<div class="symbol">{current_symbol} [{source_part}]</div>'
+                pair_html += '<div class="volatility">'
+                
+                # 处理上涨数据
+                if '上涨' in data_part:
+                    up_part = data_part.split('下跌')[0] if '下跌' in data_part else data_part
+                    up_value = up_part.split('上涨')[1].split('%')[0].strip()
+                    pair_html += '<div class="volatility-item">'
+                    pair_html += f'上涨 <span class="up">{up_value}%</span>'
+                    
+                    # 处理上涨变化值
+                    if '变化:' in up_part:
+                        change = up_part.split('变化:')[1].split('%')[0].strip()
+                        pair_html += f'<span class="change">(变化: {change}%)</span>'
+                    pair_html += '</div>'
+                
+                # 处理下跌数据
+                if '下跌' in data_part:
+                    down_part = data_part.split('下跌')[1]
+                    down_value = down_part.split('%')[0].strip()
+                    pair_html += '<div class="volatility-item">'
+                    pair_html += f'下跌 <span class="down">{down_value}%</span>'
+                    
+                    # 处理下跌变化值
+                    if '变化:' in down_part:
+                        change = down_part.split('变化:')[1].split('%')[0].strip()
+                        pair_html += f'<span class="change">(变化: {change}%)</span>'
+                    pair_html += '</div>'
+                
+                pair_html += '</div>'
+                
+                # 初始化详细信息区域
+                pair_html += '<div class="details-box">'
+                details_section = True
+                
+            # 检查是否是详细信息行（格式为 [源] 详细信息）
+            elif line.startswith('[') and ']' in line and details_section:
+                details_text = line.split(']')[1].strip()
+                detail_items = details_text.split('|')
+                
+                for item in detail_items:
+                    item = item.strip()
+                    if not item:
+                        continue
+                    
+                    # 处理当前价格
+                    if '当前价格:' in item:
+                        price = item.split('当前价格:')[1].strip()
+                        pair_html += f'<div class="detail-item"><span class="detail-label">当前价格</span><span class="detail-value">{price}</span></div>'
+                    
+                    # 处理价格变化
+                    elif '价格变化:' in item:
+                        change = item.split('价格变化:')[1].strip()
+                        change_value = float(change.replace('%', ''))
+                        css_class = 'up' if change_value > 0 else 'down'
+                        pair_html += f'<div class="detail-item"><span class="detail-label">价格变化</span><span class="detail-value {css_class}">{change}</span></div>'
+                    
+                    # 处理资金费率
+                    elif '资金费率:' in item:
+                        rate = item.split('资金费率:')[1].strip()
+                        rate_value = float(rate.replace('%', ''))
+                        css_class = 'funding-positive' if rate_value > 0 else 'funding-negative'
+                        pair_html += f'<div class="detail-item"><span class="detail-label">资金费率</span><span class="detail-value {css_class}">{rate}</span></div>'
+                    
+                    # 处理持仓量
+                    elif '持仓量:' in item:
+                        amount = item.split('持仓量:')[1].strip()
+                        pair_html += f'<div class="detail-item"><span class="detail-label">持仓量</span><span class="detail-value">{amount}</span></div>'
+                    
+                    # 处理持仓市值
+                    elif '持仓市值:' in item:
+                        value = item.split('持仓市值:')[1].strip()
+                        pair_html += f'<div class="detail-item"><span class="detail-label">持仓市值</span><span class="detail-value">{value}</span></div>'
+                
+                # 关闭详细信息区域
+                pair_html += '</div>'
+                
+                # 关闭pair_box
+                pair_html += '</div>'
+                details_section = False
+            
+            i += 1
+        
+        # 添加最后一个处理的交易对
+        if current_symbol and pair_html:
+            html += pair_html
+        
+        html += '</div>'
+        html += '</div>'
+        html += '<div class="footer">此邮件由价格监控系统自动发送</div>'
+        html += '</div>'
+        html += '</body>'
+        html += '</html>'
+
+        msg = MIMEText(html, 'html', 'utf-8')
+        msg['Subject'] = Header(subject, 'utf-8')
+        msg['From'] = EMAIL_ADDRESS
+        msg['To'] = RECIPIENT_EMAIL
+
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            server.sendmail(EMAIL_ADDRESS, RECIPIENT_EMAIL, msg.as_string())
+            print(f"邮件发送成功: {subject}")
+    except Exception as e:
+        print(f"发送邮件失败: {str(e)}")
+        return
+
     """发送邮件的函数"""
     try:
         html = '<html>'
@@ -253,9 +583,120 @@ def get_price_data(exchange, symbol, timeframe='5m'):
         # print(f"获取{symbol}数据时出错: {str(e)}")
         return None
 
-def check_price_task(exchange, symbol):
-    """线程任务：检查单个交易对的价格"""
-    return get_price_data(exchange, symbol)
+def check_price_task(exchange, symbol, max_retries=2, retry_delay=1.0):
+    """检查交易对价格变动的任务
+    
+    Args:
+        exchange: ccxt交易所实例
+        symbol: 交易对符号，如"BTC/USDT"
+        max_retries: 最大重试次数
+        retry_delay: 重试间隔(秒)
+    
+    Returns:
+        dict: 包含价格变动信息的字典，如果有错误则返回None
+    """
+    retries = 0
+    last_error = None
+    
+    while retries <= max_retries:
+        try:
+            # 如果是OKX且不是首次尝试，添加随机延迟以避免触发频率限制
+            if retries > 0 and exchange.id.lower() == 'okx':
+                # 指数退避算法：随着重试次数增加，等待时间也会增加
+                wait_time = retry_delay * (1 + random.random()) * (2 ** (retries - 1))
+                time.sleep(wait_time)
+            
+            now = int(time.time())
+            
+            # 使用1分钟K线获取最近数据
+            ohlcv_timeframe = "1m"
+            ohlcv_limit = 30  # 获取足够的数据以计算各种时间周期
+            
+            # 获取K线数据
+            ohlcv = exchange.fetch_ohlcv(symbol, ohlcv_timeframe, limit=ohlcv_limit)
+            
+            if not ohlcv or len(ohlcv) < 2:
+                return None
+                
+            current_close = ohlcv[-1][4]  # 最新K线的收盘价
+            
+            # 提前获取1分钟、5分钟和15分钟的参考价格
+            reference_times = {
+                60: None,    # 1分钟
+                300: None,   # 5分钟
+                900: None    # 15分钟
+            }
+            
+            current_time = ohlcv[-1][0]
+            
+            # 找到对应时间段的参考价格
+            for i in range(len(ohlcv) - 2, -1, -1):
+                time_diff = current_time - ohlcv[i][0]  # 毫秒差值
+                
+                # 填充各个时间段的参考价格
+                for period in reference_times.keys():
+                    if reference_times[period] is None and time_diff >= period * 1000:
+                        reference_times[period] = ohlcv[i][4]
+            
+            # 计算1分钟波动幅度作为默认值
+            reference_close = reference_times[60]
+            if reference_close is None and len(ohlcv) > 1:
+                reference_close = ohlcv[0][4]
+                
+            # 没有参考价格就不计算
+            if reference_close is None:
+                return None
+                
+            # 计算波动幅度：(当前价格 - 参考价格) / 参考价格 * 100
+            volatility = ((current_close - reference_close) / reference_close) * 100
+            
+            return {
+                'symbol': symbol,
+                'current_price': current_close,
+                'reference_price': reference_close,
+                'up_vol': volatility if volatility > 0 else 0,
+                'down_vol': volatility if volatility < 0 else 0,
+                'timestamp': now,
+            }
+        except Exception as e:
+            last_error = e
+            error_message = str(e).lower()
+            
+            # 特别处理OKX的频率限制错误
+            if 'too many requests' in error_message or 'rate limit' in error_message:
+                retries += 1
+                if retries <= max_retries:
+                    # 对于限速错误，使用更长的等待时间
+                    wait_time = retry_delay * 2 * (2 ** (retries - 1))
+                    # print(f"触发OKX限速，等待{wait_time:.2f}秒后重试 ({retries}/{max_retries})...")
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    # 重试次数用完，放弃
+                    if exchange.id.lower() == 'okx':
+                        # 仅针对OKX打印特定错误信息
+                        print(f"检查{symbol}价格时出错: {exchange.id.lower()} {str(e)}")
+                    else:
+                        print(f"检查{symbol}价格时出错，达到最大重试次数: {str(e)}")
+                    return None
+            else:
+                # 其他错误，根据类型决定是否重试
+                if 'timeout' in error_message or 'timed out' in error_message or 'connection' in error_message:
+                    retries += 1
+                    if retries <= max_retries:
+                        # 网络错误重试
+                        wait_time = retry_delay * (1 + random.random())
+                        time.sleep(wait_time)
+                        continue
+                
+                # 无法恢复的错误，打印并返回None
+                print(f"检查{symbol}价格时出错: {str(e)}")
+                return None
+    
+    # 如果执行到这里，说明达到最大重试次数仍失败
+    if last_error:
+        print(f"检查{symbol}价格时达到最大重试次数后仍失败: {str(last_error)}")
+    return None
 
 def get_candle_id(timestamp):
     """根据时间戳获取5分钟K线的唯一标识"""
@@ -974,3 +1415,66 @@ def verify_funding_rates(exchange, symbols, sample_size=10):
     else:
         print(f"\n{success_count}/{len(sample_symbols)}个交易对的资金费率数据一致")
         return False 
+    
+def get_okx_perpetual_symbols(exchange, max_retries=3):
+    """获取OKX所有USDT永续合约交易对的symbol，并增加重试机制
+    
+    Args:
+        exchange: ccxt交易所实例
+        max_retries: 最大重试次数
+    
+    Returns:
+        list: 交易对列表
+    """
+    retries = 0
+    while retries <= max_retries:
+        try:
+            # 设置为永续合约市场类型
+            exchange.options['defaultType'] = 'swap'
+            
+            # 重新加载市场数据
+            markets = exchange.load_markets()
+            
+            # 获取所有USDT永续合约交易对的symbol
+            perpetual_symbols = []
+            
+            for symbol, market in markets.items():
+                # 确保是USDT交易对且是永续合约
+                if ('quote' in market and market['quote'] == 'USDT' and 
+                    market.get('linear', False) and 
+                    not market.get('expiry')):
+                    perpetual_symbols.append(symbol)
+            
+            # 如果成功获取了交易对，则返回
+            if perpetual_symbols:
+                print(f"成功获取OKX永续合约交易对: {len(perpetual_symbols)}个")
+                return perpetual_symbols
+            else:
+                print("警告: OKX没有返回任何永续合约交易对")
+                retries += 1
+                time.sleep(1.0 * (1 + retries))
+            
+        except Exception as e:
+            error_message = str(e).lower()
+            # 根据错误类型决定是否重试
+            if 'too many requests' in error_message or 'rate limit' in error_message:
+                # 限流错误
+                wait_time = 2.0 * (2 ** retries)
+                print(f"OKX API限流，等待{wait_time:.2f}秒后重试 ({retries+1}/{max_retries})...")
+                time.sleep(wait_time)
+            elif 'timeout' in error_message or 'network' in error_message or 'connection' in error_message:
+                # 网络错误
+                wait_time = 1.0 * (1 + retries)
+                print(f"OKX API网络错误，等待{wait_time:.2f}秒后重试 ({retries+1}/{max_retries})...")
+                time.sleep(wait_time)
+            else:
+                # 其他错误
+                print(f"获取OKX永续合约交易对时出错: {str(e)}")
+                traceback.print_exc()
+                return []
+                
+            retries += 1
+            
+    # 如果所有重试都失败，返回空列表
+    print("获取OKX永续合约交易对失败，达到最大重试次数")
+    return []

@@ -85,6 +85,10 @@ async def run_ws_strategy(strategy):
 
 def run_ws_strategy_wrapper():
     """WebSocket策略的启动包装器，用于在新进程中运行"""
+    import sys
+    if sys.platform.startswith('win'):
+        # Windows系统特定修复
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(run_ws_strategy(MarketDataWsStrategy()))
 
 def main():
@@ -95,7 +99,7 @@ def main():
         print("\n请选择要运行的策略:")
         print("1. 市场数据策略 (REST API)")
         print("2. 价格波动策略")
-        print("3. 运行所有策略")
+        print("4. 运行所有策略")
         print("0. 退出")
         
         choice = input("\n请输入选项编号: ")
@@ -113,9 +117,8 @@ def main():
             # 运行价格波动策略
             strategy = PriceVolatilityStrategy()
             run_strategy(strategy)
-            
-                
-        elif choice == '3':
+        
+        elif choice == '4':
             # 运行所有策略
             processes = []
             
