@@ -193,14 +193,40 @@ class NewsVolatilityAnalyzer:
                         # 尝试获取持仓量
                         oi_data = exchange.fetch_open_interest(original_symbol)
                         if oi_data:
-                            # 优先使用美元价值，如果没有则使用合约数量
-                            open_interest_at_news = oi_data.get('openInterestValue', 0) or oi_data.get('openInterestAmount', 0) or 0
+                            open_interest_value = oi_data.get('openInterestValue', 0)
+                            open_interest_amount = oi_data.get('openInterestAmount', 0)
 
-                            # 调试信息
-                            if 'REX' in original_symbol:
+                            # 优先使用美元价值
+                            if open_interest_value and open_interest_value > 0:
+                                open_interest_at_news = open_interest_value
+                            elif open_interest_amount and open_interest_amount > 0:
+                                # 如果没有美元价值但有合约数量，尝试通过当前价格计算美元价值
+                                try:
+                                    ticker = exchange.fetch_ticker(original_symbol)
+                                    current_price = ticker.get('last', 0) or ticker.get('close', 0)
+                                    if current_price and current_price > 0:
+                                        # 合约数量 * 当前价格 = 美元价值
+                                        open_interest_at_news = open_interest_amount * current_price
+                                    else:
+                                        open_interest_at_news = 0
+                                except Exception:
+                                    open_interest_at_news = 0
+                            else:
+                                open_interest_at_news = 0
+
+                            # 调试信息 - 扩展到更多币种
+                            if any(debug_symbol in original_symbol for debug_symbol in ['FUN', 'SIREN', 'BANANAS', 'REX']):
                                 print(f"🔍 调试 {original_symbol} ({exchange_name}) 持仓量:")
-                                print(f"  openInterestValue: {oi_data.get('openInterestValue', 0)}")
-                                print(f"  openInterestAmount: {oi_data.get('openInterestAmount', 0)}")
+                                print(f"  openInterestValue: {open_interest_value}")
+                                print(f"  openInterestAmount: {open_interest_amount}")
+                                if open_interest_amount and not open_interest_value:
+                                    try:
+                                        ticker = exchange.fetch_ticker(original_symbol)
+                                        current_price = ticker.get('last', 0) or ticker.get('close', 0)
+                                        print(f"  当前价格: {current_price}")
+                                        print(f"  计算美元价值: {open_interest_amount} * {current_price} = {open_interest_at_news}")
+                                    except Exception:
+                                        print(f"  无法获取当前价格")
                                 print(f"  最终open_interest: {open_interest_at_news}")
 
                     except Exception as e:
@@ -209,7 +235,25 @@ class NewsVolatilityAnalyzer:
                             oi_history = exchange.fetch_open_interest_history(original_symbol, '1h', limit=2)
                             if oi_history:
                                 latest_oi = oi_history[-1]  # 获取最新的持仓量数据
-                                open_interest_at_news = latest_oi.get('openInterestValue', 0) or latest_oi.get('openInterestAmount', 0) or 0
+                                oi_value = latest_oi.get('openInterestValue', 0)
+                                oi_amount = latest_oi.get('openInterestAmount', 0)
+
+                                # 优先使用美元价值
+                                if oi_value and oi_value > 0:
+                                    open_interest_at_news = oi_value
+                                elif oi_amount and oi_amount > 0:
+                                    # 如果没有美元价值但有合约数量，尝试通过当前价格计算
+                                    try:
+                                        ticker = exchange.fetch_ticker(original_symbol)
+                                        current_price = ticker.get('last', 0) or ticker.get('close', 0)
+                                        if current_price and current_price > 0:
+                                            open_interest_at_news = oi_amount * current_price
+                                        else:
+                                            open_interest_at_news = 0
+                                    except Exception:
+                                        open_interest_at_news = 0
+                                else:
+                                    open_interest_at_news = 0
                         except Exception:
                             pass  # 静默失败
 
@@ -248,17 +292,21 @@ class NewsVolatilityAnalyzer:
             df['time_diff'] = abs(df['timestamp'] - news_time)
             news_index = df['time_diff'].idxmin()
             
-            # 确保有足够的前后数据
-            if news_index < window_minutes or news_index >= len(df) - window_minutes:
-                return None
-            
-            # 新闻前X分钟的数据（不包含新闻时刻）
-            before_data = df.iloc[news_index - window_minutes:news_index]
-            # 新闻后X分钟的数据（不包含新闻时刻）
-            after_data = df.iloc[news_index + 1:news_index + 1 + window_minutes]
+            # 计算实际可用的前后数据范围
+            available_before = min(news_index, window_minutes)
+            available_after = min(len(df) - news_index - 1, window_minutes)
 
-            # 确保新闻后有足够的数据
-            if len(after_data) < window_minutes:
+            # 确保有足够的数据进行分析（至少前后各1分钟）
+            if available_before < 1 or available_after < 1:
+                return None
+
+            # 新闻前的数据（使用实际可用的数据量）
+            before_data = df.iloc[news_index - available_before:news_index]
+            # 新闻后的数据（使用实际可用的数据量）
+            after_data = df.iloc[news_index + 1:news_index + 1 + available_after]
+
+            # 确保有数据可分析
+            if len(before_data) == 0 or len(after_data) == 0:
                 return None
 
             # 计算各种波动指标
@@ -407,6 +455,20 @@ class NewsVolatilityAnalyzer:
         start_time = news_timestamp - window_minutes * 60 * 1000
         end_time = news_timestamp + window_minutes * 60 * 1000
 
+        # 检查是否超过当前时间，如果超过则调整为当前时间
+        current_timestamp = int(time.time() * 1000)
+        if end_time > current_timestamp:
+            end_time = current_timestamp
+            print(f"⚠️  调整分析时间范围：新闻时间+窗口超过当前时间，结束时间调整为当前时间")
+
+        # 确保有足够的时间范围进行分析
+        time_range_minutes = (end_time - start_time) / (60 * 1000)
+        if time_range_minutes < 2:
+            print(f"❌ 时间范围太短({time_range_minutes:.1f}分钟)，建议至少2分钟的数据进行分析")
+            return {}
+
+        print(f"📅 实际分析时间范围: {time_range_minutes:.1f}分钟 (从 {datetime.fromtimestamp(start_time/1000).strftime('%H:%M:%S')} 到 {datetime.fromtimestamp(end_time/1000).strftime('%H:%M:%S')})")
+
         # 获取统一的交易对列表和原始格式映射
         unified_symbols, symbol_mapping = self.get_unified_symbols_with_mapping(market_type)
         if not unified_symbols:
@@ -492,7 +554,12 @@ class NewsVolatilityAnalyzer:
             'market_type': market_type,
             'total_symbols': len(symbol_tasks),
             'valid_results': len(final_results),
-            'results': final_results
+            'results': final_results,
+            'actual_time_range': {
+                'start_time': datetime.fromtimestamp(start_time/1000).strftime('%Y-%m-%d %H:%M:%S'),
+                'end_time': datetime.fromtimestamp(end_time/1000).strftime('%Y-%m-%d %H:%M:%S'),
+                'duration_minutes': time_range_minutes
+            }
         }
 
     def analyze_all_exchanges(self, news_time: str, market_type: str, window_minutes: int) -> Dict:
@@ -512,11 +579,12 @@ class NewsVolatilityAnalyzer:
                 'total_symbols': 0
             }
 
-        # 生成综合分析报告
-        return self.generate_analysis_report({}, unified_result['results'], news_time, window_minutes)
+        # 生成综合分析报告，传递实际的时间范围信息
+        actual_time_range = unified_result.get('actual_time_range', {})
+        return self.generate_analysis_report({}, unified_result['results'], news_time, window_minutes, actual_time_range)
 
     def generate_analysis_report(self, exchange_results: Dict, all_data: List[Dict],
-                               news_time: str, window_minutes: int) -> Dict:
+                               news_time: str, window_minutes: int, actual_time_range: Dict = None) -> Dict:
         """生成分析报告"""
         if not all_data:
             return {
@@ -551,14 +619,25 @@ class NewsVolatilityAnalyzer:
             exchange = item['exchange']
             exchange_stats[exchange] = exchange_stats.get(exchange, 0) + 1
 
+        # 构建分析信息，包含实际时间范围
+        analysis_info = {
+            'news_time': news_time,
+            'window_minutes': window_minutes,
+            'analysis_timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'data_source_distribution': exchange_stats,
+            'total_symbols_analyzed': len(all_data)
+        }
+
+        # 添加实际分析时间范围信息
+        if actual_time_range:
+            analysis_info.update({
+                'actual_start_time': actual_time_range.get('start_time'),
+                'actual_end_time': actual_time_range.get('end_time'),
+                'actual_duration_minutes': actual_time_range.get('duration_minutes')
+            })
+
         report = {
-            'analysis_info': {
-                'news_time': news_time,
-                'window_minutes': window_minutes,
-                'analysis_timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                'data_source_distribution': exchange_stats,
-                'total_symbols_analyzed': len(all_data)
-            },
+            'analysis_info': analysis_info,
             'summary_statistics': {
                 'total_symbols': len(all_data),
                 'significant_moves_count': len(significant_moves),
@@ -735,7 +814,7 @@ if __name__ == "__main__":
 
 """
 # 分析2024年1月15日14:30新闻对现货市场前后5分钟的影响
-python NewsVolatility.py --time "2025-06-18 21:10:00" --market future --window 5
+python NewsVolatility.py --time "2025-06-22 11:10:00" --market future --window 10
 
 # 分析合约市场前后10分钟的影响
 python NewsVolatility.py --time "2024-01-15 14:30" --market future --window 10
