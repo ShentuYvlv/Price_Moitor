@@ -11,6 +11,12 @@ from utils import (
     send_email, fetch_market_data_batch, fetch_historical_data_batch,
     save_data_with_timestamp, combine_market_data, verify_funding_rates
 )
+"""
+Bybit永续合约市场数据分析工具
+获取资金费率以及价格，寻找机会。
+目前这个脚本只支持bybit。
+"""
+
 
 class MarketDataStrategy(Strategy):
     """Bybit永续合约市场数据策略"""

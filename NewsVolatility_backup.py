@@ -69,38 +69,38 @@ class NewsVolatilityAnalyzerOptimized:
                 
             print("🔗 正在初始化交易所连接...")
             start_time = time.time()
-            
-            # 初始化币安
-            try:
-                self.exchanges['binance'] = ccxt.binance({
-                    'apiKey': '',
-                    'secret': '',
-                    'timeout': 30000,
-                    'enableRateLimit': True,
-                    'proxies': self.proxy_config,
-                    'options': {
-                        'defaultType': 'spot'
-                    }
-                })
-                print("✅ Binance 连接成功")
-            except Exception as e:
-                print(f"❌ Binance 连接失败: {e}")
 
-            # 初始化Bybit
-            try:
-                self.exchanges['bybit'] = ccxt.bybit({
-                    'apiKey': '',
-                    'secret': '',
-                    'timeout': 30000,
-                    'enableRateLimit': True,
-                    'proxies': self.proxy_config,
-                    'options': {
+        # 初始化币安
+        try:
+            self.exchanges['binance'] = ccxt.binance({
+                'apiKey': '',
+                'secret': '',
+                'timeout': 30000,
+                'enableRateLimit': True,
+                'proxies': self.proxy_config,
+                'options': {
                         'defaultType': 'spot'
-                    }
-                })
-                print("✅ Bybit 连接成功")
-            except Exception as e:
-                print(f"❌ Bybit 连接失败: {e}")
+                }
+            })
+            print("✅ Binance 连接成功")
+        except Exception as e:
+            print(f"❌ Binance 连接失败: {e}")
+
+        # 初始化Bybit
+        try:
+            self.exchanges['bybit'] = ccxt.bybit({
+                'apiKey': '',
+                'secret': '',
+                'timeout': 30000,
+                'enableRateLimit': True,
+                'proxies': self.proxy_config,
+                'options': {
+                    'defaultType': 'spot'
+                }
+            })
+            print("✅ Bybit 连接成功")
+        except Exception as e:
+            print(f"❌ Bybit 连接失败: {e}")
                 
             self.exchanges_initialized = True
             self.performance_stats['exchanges_initialized_time'] = time.time() - start_time
@@ -268,9 +268,165 @@ class NewsVolatilityAnalyzerOptimized:
 
         return unified_symbols, symbol_mapping
 
-    def fetch_single_symbol_data(self, symbol_info: Tuple[str, str, str, int, int]) -> Optional[Dict]:
-        """获取单个交易对的K线数据"""
+    def fetch_single_symbol_data_optimized(self, symbol_info: Tuple[str, str, str, int, int]) -> Optional[Dict]:
+        """获取单个交易对的K线数据 - 优化版本（重试机制+超时优化）"""
         normalized_symbol, original_symbol, exchange_name, start_time, end_time = symbol_info
+        request_start_time = time.time()
+        max_retries = 2  # 最多重试2次
+        retry_delay = 1  # 重试延迟1秒
+
+        for attempt in range(max_retries + 1):
+            try:
+                # 确保交易所已初始化
+                if not self.exchanges_initialized:
+                    self.init_exchanges()
+
+                if exchange_name not in self.exchanges:
+                    return None
+                    
+                exchange = self.exchanges[exchange_name]
+                duration_minutes = (end_time - start_time) // (60 * 1000)
+                limit = min(duration_minutes + 10, 200)
+
+                # 设置更短的超时时间，避免长时间等待
+                original_timeout = exchange.timeout
+                
+                try:
+                    # 第一步：获取K线数据（设置15秒超时）
+                    exchange.timeout = 15000  # 15秒超时
+                    kline_start = time.time()
+                    klines = exchange.fetch_ohlcv(
+                        symbol=original_symbol,
+                        timeframe='1m',
+                        since=start_time,
+                        limit=limit
+                    )
+                    kline_time = time.time() - kline_start
+
+                    # 第二步：过滤时间范围
+                    filtered_klines = [kline for kline in klines if start_time <= kline[0] <= end_time]
+
+                    if not filtered_klines:
+                        return None
+
+                    # 第三步：获取24小时交易量（8秒超时，快速失败）
+                    ticker_start = time.time()
+                    volume_24h = 0
+                    try:
+                        exchange.timeout = 8000  # 8秒超时
+                        ticker = exchange.fetch_ticker(original_symbol)
+                        quote_volume = ticker.get('quoteVolume', 0)
+                        base_volume = ticker.get('baseVolume', 0)
+                        volume_24h = quote_volume or base_volume or 0
+                    except Exception:
+                        # Ticker获取失败不影响主流程
+                        pass
+                    ticker_time = time.time() - ticker_start
+
+                    # 第四步：获取持仓量（8秒超时，快速失败）
+                    oi_start = time.time()
+                    open_interest = 0
+                    try:
+                        exchange.timeout = 8000  # 8秒超时
+                        if exchange_name in ['binance', 'bybit']:
+                            if exchange_name == "binance":
+                                exchange.options['defaultType'] = 'future'
+                            elif exchange_name == "bybit":
+                                exchange.options['defaultType'] = 'swap'
+
+                            oi_data = exchange.fetch_open_interest(original_symbol)
+                            if oi_data:
+                                open_interest_value = oi_data.get('openInterestValue', 0)
+                                open_interest_amount = oi_data.get('openInterestAmount', 0)
+                                open_interest = open_interest_value or open_interest_amount or 0
+                    except Exception:
+                        # 持仓量获取失败是常见的
+                        pass
+                    oi_time = time.time() - oi_start
+
+                    # 第五步：计算波动率
+                    calc_start = time.time()
+                    news_timestamp = start_time + (end_time - start_time) // 2
+                    window_minutes = (end_time - start_time) // (60 * 1000)
+                    volatility_data = self.calculate_volatility(filtered_klines, news_timestamp, window_minutes)
+                    calc_time = time.time() - calc_start
+
+                    if not volatility_data:
+                        return None
+
+                    # 计算总耗时
+                    total_time = time.time() - request_start_time
+                    
+                    # 记录慢请求（阈值降低到8秒）
+                    if total_time > 8:
+                        retry_info = f" (重试{attempt+1}次)" if attempt > 0 else ""
+                        print(f"⚠️  慢请求: {original_symbol}@{exchange_name} 耗时{total_time:.2f}s{retry_info} "
+                              f"(K线:{kline_time:.2f}s, Ticker:{ticker_time:.2f}s, "
+                              f"持仓:{oi_time:.2f}s, 计算:{calc_time:.2f}s)")
+
+                    return {
+                        'symbol': normalized_symbol,
+                        'original_symbol': original_symbol,
+                        'exchange': exchange_name,
+                        'klines': filtered_klines,
+                        'volume_24h': volume_24h,
+                        'open_interest': open_interest,
+                        'request_time': round(total_time, 3),
+                        'retry_count': attempt,  # 记录重试次数
+                        **volatility_data
+                    }
+                    
+                finally:
+                    exchange.timeout = original_timeout  # 恢复原始超时
+
+            except ccxt.NetworkError as e:
+                error_time = time.time() - request_start_time
+                if attempt < max_retries:
+                    # 还有重试机会
+                    if error_time > 10:  # 只对长时间错误显示重试信息
+                        print(f"🔄 重试{attempt+1}: {original_symbol}@{exchange_name} "
+                              f"网络错误{error_time:.1f}s，{retry_delay}秒后重试")
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    # 重试用完，记录失败
+                    if error_time > 8:
+                        print(f"🌐 网络超时: {original_symbol}@{exchange_name} {error_time:.1f}s - {str(e)[:50]}")
+                    return None
+                    
+            except ccxt.RateLimitExceeded as e:
+                error_time = time.time() - request_start_time
+                if attempt < max_retries:
+                    wait_time = (attempt + 1) * 2  # 递增等待时间
+                    print(f"🚫 API限流: {original_symbol}@{exchange_name} 等待{wait_time}秒后重试")
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    print(f"🚫 API限流: {original_symbol}@{exchange_name} {error_time:.1f}s")
+                    return None
+                    
+            except ccxt.ExchangeError:
+                # 交易所错误（如交易对不存在）- 不重试
+                return None
+                
+            except Exception as e:
+                error_time = time.time() - request_start_time
+                if attempt < max_retries and error_time > 5:
+                    print(f"🔄 重试{attempt+1}: {original_symbol}@{exchange_name} "
+                          f"未知错误{error_time:.1f}s，{retry_delay}秒后重试")
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    if error_time > 5:
+                        print(f"❓ 未知错误: {original_symbol}@{exchange_name} {error_time:.1f}s - {str(e)[:30]}")
+                    return None
+                    
+        return None  # 所有重试都失败
+
+    def fetch_single_symbol_data(self, symbol_info: Tuple[str, str, str, int, int]) -> Optional[Dict]:
+        """获取单个交易对的K线数据 - 增强错误追踪"""
+        normalized_symbol, original_symbol, exchange_name, start_time, end_time = symbol_info
+        request_start_time = time.time()
 
         try:
             # 确保交易所已初始化
@@ -284,21 +440,24 @@ class NewsVolatilityAnalyzerOptimized:
             duration_minutes = (end_time - start_time) // (60 * 1000)
             limit = min(duration_minutes + 10, 200)
 
-            # 获取K线数据
+            # 第一步：获取K线数据（通常是最耗时的）
+            kline_start = time.time()
             klines = exchange.fetch_ohlcv(
                 symbol=original_symbol,
                 timeframe='1m',
                 since=start_time,
                 limit=limit
             )
+            kline_time = time.time() - kline_start
 
-            # 过滤时间范围
+            # 第二步：过滤时间范围
             filtered_klines = [kline for kline in klines if start_time <= kline[0] <= end_time]
 
             if not filtered_klines:
                 return None
 
-            # 获取24小时交易量
+            # 第三步：获取24小时交易量
+            ticker_start = time.time()
             volume_24h = 0
             try:
                 ticker = exchange.fetch_ticker(original_symbol)
@@ -306,10 +465,13 @@ class NewsVolatilityAnalyzerOptimized:
                 quote_volume = ticker.get('quoteVolume', 0)
                 base_volume = ticker.get('baseVolume', 0)
                 volume_24h = quote_volume or base_volume or 0
-            except:
+            except Exception as ticker_error:
+                # 记录ticker获取失败，但不影响主流程
                 pass
+            ticker_time = time.time() - ticker_start
 
-            # 获取持仓量（期货市场）
+            # 第四步：获取持仓量（期货市场）
+            oi_start = time.time()
             open_interest = 0
             try:
                 if exchange_name in ['binance', 'bybit']:
@@ -324,16 +486,29 @@ class NewsVolatilityAnalyzerOptimized:
                         open_interest_amount = oi_data.get('openInterestAmount', 0)
                         # 优先使用价值（USDT），如果没有则使用数量
                         open_interest = open_interest_value or open_interest_amount or 0
-            except:
+            except Exception as oi_error:
+                # 持仓量获取失败是常见的，不记录错误
                 pass
+            oi_time = time.time() - oi_start
 
-            # 计算波动率
+            # 第五步：计算波动率
+            calc_start = time.time()
             news_timestamp = start_time + (end_time - start_time) // 2
             window_minutes = (end_time - start_time) // (60 * 1000)
             volatility_data = self.calculate_volatility(filtered_klines, news_timestamp, window_minutes)
+            calc_time = time.time() - calc_start
 
             if not volatility_data:
                 return None
+
+            # 计算总耗时
+            total_time = time.time() - request_start_time
+            
+            # 如果单个请求耗时过长（>10秒），记录详细信息
+            if total_time > 10:
+                print(f"⚠️  慢请求: {original_symbol}@{exchange_name} 耗时{total_time:.2f}s "
+                      f"(K线:{kline_time:.2f}s, Ticker:{ticker_time:.2f}s, "
+                      f"持仓:{oi_time:.2f}s, 计算:{calc_time:.2f}s)")
 
             return {
                 'symbol': normalized_symbol,
@@ -342,13 +517,31 @@ class NewsVolatilityAnalyzerOptimized:
                 'klines': filtered_klines,
                 'volume_24h': volume_24h,
                 'open_interest': open_interest,
+                'request_time': round(total_time, 3),  # 添加请求耗时
                 **volatility_data
             }
 
-        except Exception as e:
-            # 静默处理单个交易对错误
+        except ccxt.NetworkError as e:
+            # 网络错误 - 这是最常见的慢请求原因
+            error_time = time.time() - request_start_time
+            if error_time > 5:  # 超过5秒的网络错误值得关注
+                print(f"🌐 网络超时: {original_symbol}@{exchange_name} {error_time:.1f}s - {str(e)[:50]}")
             return None
-
+        except ccxt.RateLimitExceeded as e:
+            # API限流
+            error_time = time.time() - request_start_time
+            print(f"🚫 API限流: {original_symbol}@{exchange_name} {error_time:.1f}s")
+            return None
+        except ccxt.ExchangeError as e:
+            # 交易所错误（如交易对不存在）
+            return None
+        except Exception as e:
+            # 其他未知错误
+            error_time = time.time() - request_start_time
+            if error_time > 3:  # 只记录耗时较长的错误
+                print(f"❓ 未知错误: {original_symbol}@{exchange_name} {error_time:.1f}s - {str(e)[:30]}")
+            return None
+    
     def calculate_volatility(self, klines: List[List], news_timestamp: int, window_minutes: int) -> Dict:
         """计算价格波动指标 - 与原版本保持一致的算法"""
         if not klines or len(klines) < window_minutes:
@@ -478,30 +671,97 @@ class NewsVolatilityAnalyzerOptimized:
 
         print(f"📊 准备并发处理 {len(symbol_tasks)} 个交易对...")
 
-        # 并发获取数据
+        # 并发获取数据 - 添加详细进度显示
         kline_results = []
         max_workers = min(50, len(symbol_tasks))
+        
+        # 进度统计变量
+        start_time = time.time()
+        processed = 0
+        success_count = 0
+        error_count = 0
+        last_progress_time = start_time
+        last_processed = 0
+
+        print(f"🔄 启动 {max_workers} 个并发线程开始数据获取...")
+        print(f"{'进度':<8} {'成功':<6} {'失败':<6} {'速度':<12} {'剩余时间':<10} {'当前处理':<20}")
+        print("-" * 80)
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             future_to_symbol = {
-                executor.submit(self.fetch_single_symbol_data, task): task[0]
+                executor.submit(self.fetch_single_symbol_data_optimized, task): task[0]
                 for task in symbol_tasks
             }
 
-            processed = 0
             for future in as_completed(future_to_symbol):
                 processed += 1
-                if processed % 50 == 0:
-                    print(f"进度: {processed}/{len(symbol_tasks)} ({processed/len(symbol_tasks)*100:.1f}%)")
+                symbol_name = future_to_symbol[future]
+                current_time = time.time()
 
                 try:
                     result = future.result()
                     if result and result.get('klines'):
                         kline_results.append(result)
-                except Exception:
-                    pass
+                        success_count += 1
+                        status = "✅"
+                    else:
+                        error_count += 1
+                        status = "❌"
+                except Exception as e:
+                    error_count += 1
+                    status = f"❌({str(e)[:10]})"
 
-        print(f"✅ 数据获取完成，有效数据: {len(kline_results)}")
+                # 每10个或每5秒显示一次详细进度
+                time_since_last = current_time - last_progress_time
+                if processed % 10 == 0 or time_since_last >= 5:
+                    # 计算处理速度
+                    elapsed_time = current_time - start_time
+                    if elapsed_time > 0:
+                        overall_speed = processed / elapsed_time
+                        recent_speed = (processed - last_processed) / max(time_since_last, 0.1)
+                    else:
+                        overall_speed = recent_speed = 0
+                    
+                    # 估算剩余时间
+                    remaining = len(symbol_tasks) - processed
+                    if recent_speed > 0:
+                        eta_seconds = remaining / recent_speed
+                        eta_str = f"{eta_seconds:.0f}s" if eta_seconds < 60 else f"{eta_seconds/60:.1f}m"
+                    else:
+                        eta_str = "计算中"
+                    
+                    # 进度百分比
+                    progress_pct = processed / len(symbol_tasks) * 100
+                    
+                    # 显示进度信息
+                    print(f"{progress_pct:>6.1f}% {success_count:>5} {error_count:>5} "
+                          f"{recent_speed:>6.1f}/s({overall_speed:>4.1f}) {eta_str:>8} "
+                          f"{symbol_name[:18]:<18} {status}")
+                    
+                    last_progress_time = current_time
+                    last_processed = processed
+                
+                # 每50个显示一次简要进度（保持原有逻辑）
+                elif processed % 50 == 0:
+                    progress_pct = processed / len(symbol_tasks) * 100
+                    elapsed = current_time - start_time
+                    speed = processed / elapsed if elapsed > 0 else 0
+                    print(f"{progress_pct:>6.1f}% {success_count:>5} {error_count:>5} "
+                          f"{speed:>6.1f}/s        {'':>8} {'批量进度更新':<18}")
+
+        # 最终统计
+        total_time = time.time() - start_time
+        final_speed = len(symbol_tasks) / total_time if total_time > 0 else 0
+        
+        print("-" * 80)
+        print(f"✅ 数据获取完成！")
+        print(f"📊 处理统计: 总数={len(symbol_tasks)}, 成功={success_count}, 失败={error_count}")
+        print(f"⏱️  耗时统计: 总耗时={total_time:.2f}秒, 平均速度={final_speed:.2f}个/秒")
+        print(f"📈 成功率: {success_count/len(symbol_tasks)*100:.1f}%")
+        
+        # 如果失败率过高，给出提示
+        if error_count / len(symbol_tasks) > 0.3:
+            print(f"⚠️  失败率较高({error_count/len(symbol_tasks)*100:.1f}%)，可能存在网络问题或API限制")
 
         return {
             'market_type': market_type,
@@ -802,4 +1062,4 @@ python NewsVolatility_Optimized.py --time "2025-06-22 11:10:00" --save --output 
 - 从30+秒降低到2-3秒
 - 智能延迟初始化避免不必要的网络连接
 - 优化的缓存验证逻辑
-""" 
+"""

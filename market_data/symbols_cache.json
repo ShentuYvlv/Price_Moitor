@@ -1,0 +1,2818 @@
+{
+  "all_future": {
+    "unified_symbols": {
+      "DIA/USDT": "binance",
+      "BB/USDT": "binance",
+      "FORM/USDT": "binance",
+      "ATOM/USDT": "binance",
+      "SC/USDT": "binance",
+      "ZEN/USDT": "binance",
+      "BAND/USDT": "binance",
+      "MEMEFI/USDT": "binance",
+      "INJ/USDT": "binance",
+      "SWELL/USDT": "binance",
+      "DEFI/USDT": "binance",
+      "RED/USDT": "binance",
+      "MASK/USDT": "binance",
+      "AR/USDT": "binance",
+      "HUMA/USDT": "binance",
+      "POLYX/USDT": "binance",
+      "SKATE/USDT": "binance",
+      "JELLYJELLY/USDT": "binance",
+      "CHZ/USDT": "binance",
+      "USTC/USDT": "binance",
+      "STRAX/USDT": "binance",
+      "DASH/USDT": "binance",
+      "SYRUP/USDT": "binance",
+      "UMA/USDT": "binance",
+      "GALA/USDT": "binance",
+      "COMBO/USDT": "binance",
+      "DENT/USDT": "binance",
+      "OG/USDT": "binance",
+      "ORBS/USDT": "binance",
+      "ADA/USDT": "binance",
+      "LINK/USDT": "binance",
+      "TRU/USDT": "binance",
+      "VELODROME/USDT": "binance",
+      "COMP/USDT": "binance",
+      "SPK/USDT": "binance",
+      "TURBO/USDT": "binance",
+      "LOKA/USDT": "binance",
+      "DGB/USDT": "binance",
+      "FLOW/USDT": "binance",
+      "ZEREBRO/USDT": "binance",
+      "QUICK/USDT": "binance",
+      "SKYAI/USDT": "binance",
+      "IOTX/USDT": "binance",
+      "PEOPLE/USDT": "binance",
+      "POL/USDT": "binance",
+      "NIL/USDT": "binance",
+      "SUN/USDT": "binance",
+      "CHR/USDT": "binance",
+      "MBOX/USDT": "binance",
+      "STMX/USDT": "binance",
+      "SLERF/USDT": "binance",
+      "TAO/USDT": "binance",
+      "STX/USDT": "binance",
+      "BAN/USDT": "binance",
+      "ARK/USDT": "binance",
+      "REEF/USDT": "binance",
+      "AERO/USDT": "binance",
+      "DEEP/USDT": "binance",
+      "SQD/USDT": "binance",
+      "LISTA/USDT": "binance",
+      "KEY/USDT": "binance",
+      "BICO/USDT": "binance",
+      "1000FLOKI/USDT": "binance",
+      "1000000MOG/USDT": "binance",
+      "DODOX/USDT": "binance",
+      "SLP/USDT": "binance",
+      "BEL/USDT": "binance",
+      "ARKM/USDT": "binance",
+      "STORJ/USDT": "binance",
+      "HMSTR/USDT": "binance",
+      "DOGE/USDT": "binance",
+      "OCEAN/USDT": "binance",
+      "BLZ/USDT": "binance",
+      "AI16Z/USDT": "binance",
+      "VANA/USDT": "binance",
+      "TRUMP/USDT": "binance",
+      "RAYSOL/USDT": "binance",
+      "HEI/USDT": "binance",
+      "KAS/USDT": "binance",
+      "DOGS/USDT": "binance",
+      "DYDX/USDT": "binance",
+      "MUBARAK/USDT": "binance",
+      "MKR/USDT": "binance",
+      "ICP/USDT": "binance",
+      "WAVES/USDT": "binance",
+      "MOCA/USDT": "binance",
+      "VET/USDT": "binance",
+      "S/USDT": "binance",
+      "BANK/USDT": "binance",
+      "PENDLE/USDT": "binance",
+      "XMR/USDT": "binance",
+      "C98/USDT": "binance",
+      "LIT/USDT": "binance",
+      "F/USDT": "binance",
+      "SOLV/USDT": "binance",
+      "DYM/USDT": "binance",
+      "SHELL/USDT": "binance",
+      "SYS/USDT": "binance",
+      "GUN/USDT": "binance",
+      "AGIX/USDT": "binance",
+      "NOT/USDT": "binance",
+      "AWE/USDT": "binance",
+      "NMR/USDT": "binance",
+      "OGN/USDT": "binance",
+      "POWR/USDT": "binance",
+      "YFI/USDT": "binance",
+      "CHESS/USDT": "binance",
+      "1000BONK/USDT": "binance",
+      "WAXP/USDT": "binance",
+      "IO/USDT": "binance",
+      "BRETT/USDT": "binance",
+      "CVC/USDT": "binance",
+      "AAVE/USDT": "binance",
+      "API3/USDT": "binance",
+      "OMNI/USDT": "binance",
+      "UXLINK/USDT": "binance",
+      "DUSK/USDT": "binance",
+      "KAIA/USDT": "binance",
+      "CELO/USDT": "binance",
+      "NEAR/USDT": "binance",
+      "1000LUNC/USDT": "binance",
+      "AUCTION/USDT": "binance",
+      "CETUS/USDT": "binance",
+      "LOOM/USDT": "binance",
+      "JASMY/USDT": "binance",
+      "IDEX/USDT": "binance",
+      "KNC/USDT": "binance",
+      "USUAL/USDT": "binance",
+      "TRB/USDT": "binance",
+      "SAHARA/USDT": "binance",
+      "CKB/USDT": "binance",
+      "GRT/USDT": "binance",
+      "RAD/USDT": "binance",
+      "IP/USDT": "binance",
+      "AERGO/USDT": "binance",
+      "ZIL/USDT": "binance",
+      "RONIN/USDT": "binance",
+      "ATH/USDT": "binance",
+      "MANTA/USDT": "binance",
+      "ILV/USDT": "binance",
+      "ARPA/USDT": "binance",
+      "SOL/USDT": "binance",
+      "SPX/USDT": "binance",
+      "HAEDAL/USDT": "binance",
+      "POPCAT/USDT": "binance",
+      "SAFE/USDT": "binance",
+      "INIT/USDT": "binance",
+      "ETH/USDT": "binance",
+      "XVG/USDT": "binance",
+      "STPT/USDT": "binance",
+      "PNUT/USDT": "binance",
+      "NTRN/USDT": "binance",
+      "EIGEN/USDT": "binance",
+      "SWARMS/USDT": "binance",
+      "ME/USDT": "binance",
+      "CTK/USDT": "binance",
+      "BCH/USDT": "binance",
+      "HOME/USDT": "binance",
+      "SANTOS/USDT": "binance",
+      "RSR/USDT": "binance",
+      "ID/USDT": "binance",
+      "BIGTIME/USDT": "binance",
+      "CFX/USDT": "binance",
+      "ACX/USDT": "binance",
+      "BEAMX/USDT": "binance",
+      "JUP/USDT": "binance",
+      "AIOT/USDT": "binance",
+      "COOKIE/USDT": "binance",
+      "ALCH/USDT": "binance",
+      "TIA/USDT": "binance",
+      "SKL/USDT": "binance",
+      "KOMA/USDT": "binance",
+      "AVAX/USDT": "binance",
+      "RVN/USDT": "binance",
+      "STEEM/USDT": "binance",
+      "NFP/USDT": "binance",
+      "BOME/USDT": "binance",
+      "HIGH/USDT": "binance",
+      "GPS/USDT": "binance",
+      "GOAT/USDT": "binance",
+      "ACE/USDT": "binance",
+      "TOKEN/USDT": "binance",
+      "LUNA2/USDT": "binance",
+      "AI/USDT": "binance",
+      "VIC/USDT": "binance",
+      "GTC/USDT": "binance",
+      "ARC/USDT": "binance",
+      "COW/USDT": "binance",
+      "KDA/USDT": "binance",
+      "SUSHI/USDT": "binance",
+      "AEVO/USDT": "binance",
+      "1000CHEEMS/USDT": "binance",
+      "ALPINE/USDT": "binance",
+      "RLC/USDT": "binance",
+      "LRC/USDT": "binance",
+      "MTL/USDT": "binance",
+      "TWT/USDT": "binance",
+      "1000CAT/USDT": "binance",
+      "SEI/USDT": "binance",
+      "IOTA/USDT": "binance",
+      "GMX/USDT": "binance",
+      "ONT/USDT": "binance",
+      "TST/USDT": "binance",
+      "GRASS/USDT": "binance",
+      "CATI/USDT": "binance",
+      "SCRT/USDT": "binance",
+      "MERL/USDT": "binance",
+      "PIXEL/USDT": "binance",
+      "VIDT/USDT": "binance",
+      "WCT/USDT": "binance",
+      "T/USDT": "binance",
+      "YGG/USDT": "binance",
+      "WLD/USDT": "binance",
+      "GLM/USDT": "binance",
+      "BADGER/USDT": "binance",
+      "1INCH/USDT": "binance",
+      "GAS/USDT": "binance",
+      "SPELL/USDT": "binance",
+      "BSW/USDT": "binance",
+      "MYX/USDT": "binance",
+      "PORTAL/USDT": "binance",
+      "BANANA/USDT": "binance",
+      "KLAY/USDT": "binance",
+      "H/USDT": "binance",
+      "RARE/USDT": "binance",
+      "GMT/USDT": "binance",
+      "SNT/USDT": "binance",
+      "EPT/USDT": "binance",
+      "DEGO/USDT": "binance",
+      "TLM/USDT": "binance",
+      "MINA/USDT": "binance",
+      "BSV/USDT": "binance",
+      "MEW/USDT": "binance",
+      "ZEC/USDT": "binance",
+      "VANRY/USDT": "binance",
+      "BIO/USDT": "binance",
+      "HIFI/USDT": "binance",
+      "RUNE/USDT": "binance",
+      "COTI/USDT": "binance",
+      "PENGU/USDT": "binance",
+      "LAYER/USDT": "binance",
+      "CAKE/USDT": "binance",
+      "CRV/USDT": "binance",
+      "AGT/USDT": "binance",
+      "PONKE/USDT": "binance",
+      "FORTH/USDT": "binance",
+      "LTC/USDT": "binance",
+      "PUMP/USDT": "binance",
+      "1000000BOB/USDT": "binance",
+      "FUN/USDT": "binance",
+      "CYBER/USDT": "binance",
+      "ICX/USDT": "binance",
+      "ROSE/USDT": "binance",
+      "JTO/USDT": "binance",
+      "BID/USDT": "binance",
+      "PHB/USDT": "binance",
+      "1000SATS/USDT": "binance",
+      "WIF/USDT": "binance",
+      "SUPER/USDT": "binance",
+      "DRIFT/USDT": "binance",
+      "THE/USDT": "binance",
+      "BNB/USDT": "binance",
+      "1000X/USDT": "binance",
+      "SOON/USDT": "binance",
+      "LA/USDT": "binance",
+      "NEIRO/USDT": "binance",
+      "ALT/USDT": "binance",
+      "KSM/USDT": "binance",
+      "ACH/USDT": "binance",
+      "BAKE/USDT": "binance",
+      "BROCCOLI714/USDT": "binance",
+      "SNX/USDT": "binance",
+      "LUMIA/USDT": "binance",
+      "HIVE/USDT": "binance",
+      "USDC/USDT": "binance",
+      "RDNT/USDT": "binance",
+      "NEO/USDT": "binance",
+      "ZK/USDT": "binance",
+      "TAIKO/USDT": "binance",
+      "TRX/USDT": "binance",
+      "VINE/USDT": "binance",
+      "PAXG/USDT": "binance",
+      "FIL/USDT": "binance",
+      "EPIC/USDT": "binance",
+      "BLUR/USDT": "binance",
+      "MAVIA/USDT": "binance",
+      "FTM/USDT": "binance",
+      "LEVER/USDT": "binance",
+      "OP/USDT": "binance",
+      "APE/USDT": "binance",
+      "FET/USDT": "binance",
+      "PHA/USDT": "binance",
+      "BTC/USDT": "binance",
+      "KERNEL/USDT": "binance",
+      "BAL/USDT": "binance",
+      "SUI/USDT": "binance",
+      "B3/USDT": "binance",
+      "MLN/USDT": "binance",
+      "PROMPT/USDT": "binance",
+      "IMX/USDT": "binance",
+      "ATA/USDT": "binance",
+      "HYPE/USDT": "binance",
+      "FARTCOIN/USDT": "binance",
+      "LPT/USDT": "binance",
+      "HOOK/USDT": "binance",
+      "QNT/USDT": "binance",
+      "MELANIA/USDT": "binance",
+      "ENS/USDT": "binance",
+      "MDT/USDT": "binance",
+      "SAND/USDT": "binance",
+      "ALPACA/USDT": "binance",
+      "ALICE/USDT": "binance",
+      "MAV/USDT": "binance",
+      "1000PEPE/USDT": "binance",
+      "SSV/USDT": "binance",
+      "MOODENG/USDT": "binance",
+      "APT/USDT": "binance",
+      "BNT/USDT": "binance",
+      "SAGA/USDT": "binance",
+      "FXS/USDT": "binance",
+      "ORDI/USDT": "binance",
+      "NULS/USDT": "binance",
+      "PORT3/USDT": "binance",
+      "BDXN/USDT": "binance",
+      "A/USDT": "binance",
+      "WAL/USDT": "binance",
+      "ONG/USDT": "binance",
+      "GRIFFAIN/USDT": "binance",
+      "BR/USDT": "binance",
+      "DOOD/USDT": "binance",
+      "ANKR/USDT": "binance",
+      "RENDER/USDT": "binance",
+      "BOND/USDT": "binance",
+      "ZETA/USDT": "binance",
+      "QTUM/USDT": "binance",
+      "PARTI/USDT": "binance",
+      "W/USDT": "binance",
+      "BTCST/USDT": "binance",
+      "FIO/USDT": "binance",
+      "TNSR/USDT": "binance",
+      "XVS/USDT": "binance",
+      "HIPPO/USDT": "binance",
+      "MORPHO/USDT": "binance",
+      "TON/USDT": "binance",
+      "OXT/USDT": "binance",
+      "OMG/USDT": "binance",
+      "ASTR/USDT": "binance",
+      "AVA/USDT": "binance",
+      "LSK/USDT": "binance",
+      "IOST/USDT": "binance",
+      "FLUX/USDT": "binance",
+      "FLM/USDT": "binance",
+      "XRP/USDT": "binance",
+      "XLM/USDT": "binance",
+      "DMC/USDT": "binance",
+      "METIS/USDT": "binance",
+      "PUFFER/USDT": "binance",
+      "ACT/USDT": "binance",
+      "JOE/USDT": "binance",
+      "XTZ/USDT": "binance",
+      "ZRX/USDT": "binance",
+      "1000WHY/USDT": "binance",
+      "SONIC/USDT": "binance",
+      "ASR/USDT": "binance",
+      "FTT/USDT": "binance",
+      "BMT/USDT": "binance",
+      "D/USDT": "binance",
+      "CTSI/USDT": "binance",
+      "HYPER/USDT": "binance",
+      "BERA/USDT": "binance",
+      "AGLD/USDT": "binance",
+      "RESOLV/USDT": "binance",
+      "SXP/USDT": "binance",
+      "BNX/USDT": "binance",
+      "LINA/USDT": "binance",
+      "GHST/USDT": "binance",
+      "PYTH/USDT": "binance",
+      "AIXBT/USDT": "binance",
+      "THETA/USDT": "binance",
+      "GLMR/USDT": "binance",
+      "PLUME/USDT": "binance",
+      "HOT/USDT": "binance",
+      "SIGN/USDT": "binance",
+      "SCR/USDT": "binance",
+      "NXPC/USDT": "binance",
+      "FIDA/USDT": "binance",
+      "CHILLGUY/USDT": "binance",
+      "EDU/USDT": "binance",
+      "HFT/USDT": "binance",
+      "NKN/USDT": "binance",
+      "DAR/USDT": "binance",
+      "OBOL/USDT": "binance",
+      "CVX/USDT": "binance",
+      "TUT/USDT": "binance",
+      "1000XEC/USDT": "binance",
+      "B/USDT": "binance",
+      "UNI/USDT": "binance",
+      "AXS/USDT": "binance",
+      "UNFI/USDT": "binance",
+      "ORCA/USDT": "binance",
+      "ALPHA/USDT": "binance",
+      "NEIROETH/USDT": "binance",
+      "VIRTUAL/USDT": "binance",
+      "BABY/USDT": "binance",
+      "OM/USDT": "binance",
+      "AKT/USDT": "binance",
+      "DEXE/USDT": "binance",
+      "KMNO/USDT": "binance",
+      "SIREN/USDT": "binance",
+      "DF/USDT": "binance",
+      "1000RATS/USDT": "binance",
+      "KAITO/USDT": "binance",
+      "EGLD/USDT": "binance",
+      "ENA/USDT": "binance",
+      "SXT/USDT": "binance",
+      "ZKJ/USDT": "binance",
+      "1000SHIB/USDT": "binance",
+      "PERP/USDT": "binance",
+      "ONE/USDT": "binance",
+      "SYN/USDT": "binance",
+      "ENJ/USDT": "binance",
+      "MANA/USDT": "binance",
+      "MOVR/USDT": "binance",
+      "OL/USDT": "binance",
+      "XEM/USDT": "binance",
+      "ALGO/USDT": "binance",
+      "COS/USDT": "binance",
+      "LDO/USDT": "binance",
+      "AMB/USDT": "binance",
+      "1MBABYDOGE/USDT": "binance",
+      "TROY/USDT": "binance",
+      "AVAAI/USDT": "binance",
+      "REI/USDT": "binance",
+      "VTHO/USDT": "binance",
+      "NEWT/USDT": "binance",
+      "HBAR/USDT": "binance",
+      "VOXEL/USDT": "binance",
+      "STO/USDT": "binance",
+      "MOVE/USDT": "binance",
+      "B2/USDT": "binance",
+      "FHE/USDT": "binance",
+      "SOPH/USDT": "binance",
+      "ZRO/USDT": "binance",
+      "JST/USDT": "binance",
+      "DEGEN/USDT": "binance",
+      "AXL/USDT": "binance",
+      "PUMPBTC/USDT": "binance",
+      "RIF/USDT": "binance",
+      "MILK/USDT": "binance",
+      "G/USDT": "binance",
+      "RAY/USDT": "binance",
+      "ONDO/USDT": "binance",
+      "FIS/USDT": "binance",
+      "BANANAS31/USDT": "binance",
+      "CGPT/USDT": "binance",
+      "PROM/USDT": "binance",
+      "BAT/USDT": "binance",
+      "ANIME/USDT": "binance",
+      "DOLO/USDT": "binance",
+      "REN/USDT": "binance",
+      "DOT/USDT": "binance",
+      "KAVA/USDT": "binance",
+      "BTCDOM/USDT": "binance",
+      "ETC/USDT": "binance",
+      "PIPPIN/USDT": "binance",
+      "ETHW/USDT": "binance",
+      "MEME/USDT": "binance",
+      "MYRO/USDT": "binance",
+      "BROCCOLIF3B/USDT": "binance",
+      "VVV/USDT": "binance",
+      "ETHFI/USDT": "binance",
+      "CELR/USDT": "binance",
+      "WOO/USDT": "binance",
+      "PUNDIX/USDT": "binance",
+      "SFP/USDT": "binance",
+      "MAGIC/USDT": "binance",
+      "RPL/USDT": "binance",
+      "LQTY/USDT": "binance",
+      "REZ/USDT": "binance",
+      "ARB/USDT": "binance",
+      "XAI/USDT": "binance",
+      "STG/USDT": "binance",
+      "STRK/USDT": "binance",
+      "XCN/USDT": "binance",
+      "FB/USDT": "bybit",
+      "CPOOL/USDT": "bybit",
+      "COOK/USDT": "bybit",
+      "CLANKER/USDT": "bybit",
+      "SUNDOG/USDT": "bybit",
+      "OBT/USDT": "bybit",
+      "SERAPH/USDT": "bybit",
+      "ALEO/USDT": "bybit",
+      "CTC/USDT": "bybit",
+      "1000TOSHI/USDT": "bybit",
+      "PRIME/USDT": "bybit",
+      "TAI/USDT": "bybit",
+      "J/USDT": "bybit",
+      "OSMO/USDT": "bybit",
+      "DODO/USDT": "bybit",
+      "TSTBSC/USDT": "bybit",
+      "AIOZ/USDT": "bybit",
+      "BROCCOLI/USDT": "bybit",
+      "L3/USDT": "bybit",
+      "QI/USDT": "bybit",
+      "AUDIO/USDT": "bybit",
+      "SPEC/USDT": "bybit",
+      "FLOCK/USDT": "bybit",
+      "XNO/USDT": "bybit",
+      "PEAQ/USDT": "bybit",
+      "CRO/USDT": "bybit",
+      "FLR/USDT": "bybit",
+      "HPOS10I/USDT": "bybit",
+      "NS/USDT": "bybit",
+      "BEAM/USDT": "bybit",
+      "SAROS/USDT": "bybit",
+      "XION/USDT": "bybit",
+      "USDE/USDT": "bybit",
+      "RFC/USDT": "bybit",
+      "PRAI/USDT": "bybit",
+      "SOSO/USDT": "bybit",
+      "AVAIL/USDT": "bybit",
+      "RSS3/USDT": "bybit",
+      "VR/USDT": "bybit",
+      "10000LADYS/USDT": "bybit",
+      "ETHBTC/USDT": "bybit",
+      "ZEUS/USDT": "bybit",
+      "MBL/USDT": "bybit",
+      "1000APU/USDT": "bybit",
+      "1000TURBO/USDT": "bybit",
+      "LAUNCHCOIN/USDT": "bybit",
+      "AGI/USDT": "bybit",
+      "10000WEN/USDT": "bybit",
+      "DUCK/USDT": "bybit",
+      "XCH/USDT": "bybit",
+      "REX/USDT": "bybit",
+      "GIGA/USDT": "bybit",
+      "CORE/USDT": "bybit",
+      "NC/USDT": "bybit",
+      "ROAM/USDT": "bybit",
+      "1000000BABYDOGE/USDT": "bybit",
+      "10000QUBIC/USDT": "bybit",
+      "10000WHY/USDT": "bybit",
+      "FWOG/USDT": "bybit",
+      "MOBILE/USDT": "bybit",
+      "REQ/USDT": "bybit",
+      "PRCL/USDT": "bybit",
+      "1000BTT/USDT": "bybit",
+      "RAYDIUM/USDT": "bybit",
+      "DARK/USDT": "bybit",
+      "ZRC/USDT": "bybit",
+      "GNO/USDT": "bybit",
+      "10000SATS/USDT": "bybit",
+      "SHIB1000/USDT": "bybit",
+      "MYRIA/USDT": "bybit",
+      "ZENT/USDT": "bybit",
+      "10000COQ/USDT": "bybit",
+      "SLF/USDT": "bybit",
+      "MNT/USDT": "bybit",
+      "XDC/USDT": "bybit",
+      "ZBCN/USDT": "bybit",
+      "SCA/USDT": "bybit",
+      "ORDER/USDT": "bybit",
+      "GORK/USDT": "bybit",
+      "ELX/USDT": "bybit",
+      "SOLAYER/USDT": "bybit",
+      "CARV/USDT": "bybit",
+      "1000CATS/USDT": "bybit",
+      "DBR/USDT": "bybit",
+      "SWEAT/USDT": "bybit",
+      "HNT/USDT": "bybit",
+      "XTER/USDT": "bybit",
+      "ALU/USDT": "bybit",
+      "1000000PEIPEI/USDT": "bybit",
+      "MVL/USDT": "bybit",
+      "LOOKS/USDT": "bybit",
+      "FUEL/USDT": "bybit",
+      "XRD/USDT": "bybit",
+      "BLAST/USDT": "bybit",
+      "A8/USDT": "bybit",
+      "BOBA/USDT": "bybit",
+      "1000000CHEEMS/USDT": "bybit",
+      "PYR/USDT": "bybit",
+      "SOLO/USDT": "bybit",
+      "VELO/USDT": "bybit",
+      "DOG/USDT": "bybit",
+      "XAUT/USDT": "bybit",
+      "MAJOR/USDT": "bybit",
+      "AVL/USDT": "bybit",
+      "CUDIS/USDT": "bybit",
+      "CLOUD/USDT": "bybit",
+      "ZORA/USDT": "bybit",
+      "1000NEIROCTO/USDT": "bybit",
+      "10000ELON/USDT": "bybit",
+      "GODS/USDT": "bybit",
+      "MASA/USDT": "bybit",
+      "SEND/USDT": "bybit",
+      "SD/USDT": "bybit"
+    },
+    "symbol_mapping": {
+      "BTC/USDT": {
+        "binance": "BTC/USDT:USDT",
+        "bybit": "BTC/USDT:USDT"
+      },
+      "ETH/USDT": {
+        "binance": "ETH/USDT:USDT",
+        "bybit": "ETH/USDT:USDT"
+      },
+      "BCH/USDT": {
+        "binance": "BCH/USDT:USDT",
+        "bybit": "BCH/USDT:USDT"
+      },
+      "XRP/USDT": {
+        "binance": "XRP/USDT:USDT",
+        "bybit": "XRP/USDT:USDT"
+      },
+      "LTC/USDT": {
+        "binance": "LTC/USDT:USDT",
+        "bybit": "LTC/USDT:USDT"
+      },
+      "TRX/USDT": {
+        "binance": "TRX/USDT:USDT",
+        "bybit": "TRX/USDT:USDT"
+      },
+      "ETC/USDT": {
+        "binance": "ETC/USDT:USDT",
+        "bybit": "ETC/USDT:USDT"
+      },
+      "LINK/USDT": {
+        "binance": "LINK/USDT:USDT",
+        "bybit": "LINK/USDT:USDT"
+      },
+      "XLM/USDT": {
+        "binance": "XLM/USDT:USDT",
+        "bybit": "XLM/USDT:USDT"
+      },
+      "ADA/USDT": {
+        "binance": "ADA/USDT:USDT",
+        "bybit": "ADA/USDT:USDT"
+      },
+      "XMR/USDT": {
+        "binance": "XMR/USDT:USDT",
+        "bybit": "XMR/USDT:USDT"
+      },
+      "DASH/USDT": {
+        "binance": "DASH/USDT:USDT",
+        "bybit": "DASH/USDT:USDT"
+      },
+      "ZEC/USDT": {
+        "binance": "ZEC/USDT:USDT",
+        "bybit": "ZEC/USDT:USDT"
+      },
+      "XTZ/USDT": {
+        "binance": "XTZ/USDT:USDT",
+        "bybit": "XTZ/USDT:USDT"
+      },
+      "BNB/USDT": {
+        "binance": "BNB/USDT:USDT",
+        "bybit": "BNB/USDT:USDT"
+      },
+      "ATOM/USDT": {
+        "binance": "ATOM/USDT:USDT",
+        "bybit": "ATOM/USDT:USDT"
+      },
+      "ONT/USDT": {
+        "binance": "ONT/USDT:USDT",
+        "bybit": "ONT/USDT:USDT"
+      },
+      "IOTA/USDT": {
+        "binance": "IOTA/USDT:USDT",
+        "bybit": "IOTA/USDT:USDT"
+      },
+      "BAT/USDT": {
+        "binance": "BAT/USDT:USDT",
+        "bybit": "BAT/USDT:USDT"
+      },
+      "VET/USDT": {
+        "binance": "VET/USDT:USDT",
+        "bybit": "VET/USDT:USDT"
+      },
+      "NEO/USDT": {
+        "binance": "NEO/USDT:USDT",
+        "bybit": "NEO/USDT:USDT"
+      },
+      "QTUM/USDT": {
+        "binance": "QTUM/USDT:USDT",
+        "bybit": "QTUM/USDT:USDT"
+      },
+      "IOST/USDT": {
+        "binance": "IOST/USDT:USDT",
+        "bybit": "IOST/USDT:USDT"
+      },
+      "THETA/USDT": {
+        "binance": "THETA/USDT:USDT",
+        "bybit": "THETA/USDT:USDT"
+      },
+      "ALGO/USDT": {
+        "binance": "ALGO/USDT:USDT",
+        "bybit": "ALGO/USDT:USDT"
+      },
+      "ZIL/USDT": {
+        "binance": "ZIL/USDT:USDT",
+        "bybit": "ZIL/USDT:USDT"
+      },
+      "KNC/USDT": {
+        "binance": "KNC/USDT:USDT",
+        "bybit": "KNC/USDT:USDT"
+      },
+      "ZRX/USDT": {
+        "binance": "ZRX/USDT:USDT",
+        "bybit": "ZRX/USDT:USDT"
+      },
+      "COMP/USDT": {
+        "binance": "COMP/USDT:USDT",
+        "bybit": "COMP/USDT:USDT"
+      },
+      "OMG/USDT": {
+        "binance": "OMG/USDT:USDT"
+      },
+      "DOGE/USDT": {
+        "binance": "DOGE/USDT:USDT",
+        "bybit": "DOGE/USDT:USDT"
+      },
+      "SXP/USDT": {
+        "binance": "SXP/USDT:USDT",
+        "bybit": "SXP/USDT:USDT"
+      },
+      "KAVA/USDT": {
+        "binance": "KAVA/USDT:USDT",
+        "bybit": "KAVA/USDT:USDT"
+      },
+      "BAND/USDT": {
+        "binance": "BAND/USDT:USDT",
+        "bybit": "BAND/USDT:USDT"
+      },
+      "RLC/USDT": {
+        "binance": "RLC/USDT:USDT",
+        "bybit": "RLC/USDT:USDT"
+      },
+      "WAVES/USDT": {
+        "binance": "WAVES/USDT:USDT",
+        "bybit": "WAVES/USDT:USDT"
+      },
+      "MKR/USDT": {
+        "binance": "MKR/USDT:USDT",
+        "bybit": "MKR/USDT:USDT"
+      },
+      "SNX/USDT": {
+        "binance": "SNX/USDT:USDT",
+        "bybit": "SNX/USDT:USDT"
+      },
+      "DOT/USDT": {
+        "binance": "DOT/USDT:USDT",
+        "bybit": "DOT/USDT:USDT"
+      },
+      "DEFI/USDT": {
+        "binance": "DEFI/USDT:USDT"
+      },
+      "YFI/USDT": {
+        "binance": "YFI/USDT:USDT",
+        "bybit": "YFI/USDT:USDT"
+      },
+      "BAL/USDT": {
+        "binance": "BAL/USDT:USDT",
+        "bybit": "BAL/USDT:USDT"
+      },
+      "CRV/USDT": {
+        "binance": "CRV/USDT:USDT",
+        "bybit": "CRV/USDT:USDT"
+      },
+      "TRB/USDT": {
+        "binance": "TRB/USDT:USDT",
+        "bybit": "TRB/USDT:USDT"
+      },
+      "RUNE/USDT": {
+        "binance": "RUNE/USDT:USDT",
+        "bybit": "RUNE/USDT:USDT"
+      },
+      "SUSHI/USDT": {
+        "binance": "SUSHI/USDT:USDT",
+        "bybit": "SUSHI/USDT:USDT"
+      },
+      "EGLD/USDT": {
+        "binance": "EGLD/USDT:USDT",
+        "bybit": "EGLD/USDT:USDT"
+      },
+      "SOL/USDT": {
+        "binance": "SOL/USDT:USDT",
+        "bybit": "SOL/USDT:USDT"
+      },
+      "ICX/USDT": {
+        "binance": "ICX/USDT:USDT",
+        "bybit": "ICX/USDT:USDT"
+      },
+      "STORJ/USDT": {
+        "binance": "STORJ/USDT:USDT",
+        "bybit": "STORJ/USDT:USDT"
+      },
+      "BLZ/USDT": {
+        "binance": "BLZ/USDT:USDT"
+      },
+      "UNI/USDT": {
+        "binance": "UNI/USDT:USDT",
+        "bybit": "UNI/USDT:USDT"
+      },
+      "AVAX/USDT": {
+        "binance": "AVAX/USDT:USDT",
+        "bybit": "AVAX/USDT:USDT"
+      },
+      "FTM/USDT": {
+        "binance": "FTM/USDT:USDT"
+      },
+      "ENJ/USDT": {
+        "binance": "ENJ/USDT:USDT",
+        "bybit": "ENJ/USDT:USDT"
+      },
+      "FLM/USDT": {
+        "binance": "FLM/USDT:USDT",
+        "bybit": "FLM/USDT:USDT"
+      },
+      "REN/USDT": {
+        "binance": "REN/USDT:USDT"
+      },
+      "KSM/USDT": {
+        "binance": "KSM/USDT:USDT",
+        "bybit": "KSM/USDT:USDT"
+      },
+      "NEAR/USDT": {
+        "binance": "NEAR/USDT:USDT",
+        "bybit": "NEAR/USDT:USDT"
+      },
+      "AAVE/USDT": {
+        "binance": "AAVE/USDT:USDT",
+        "bybit": "AAVE/USDT:USDT"
+      },
+      "FIL/USDT": {
+        "binance": "FIL/USDT:USDT",
+        "bybit": "FIL/USDT:USDT"
+      },
+      "RSR/USDT": {
+        "binance": "RSR/USDT:USDT",
+        "bybit": "RSR/USDT:USDT"
+      },
+      "LRC/USDT": {
+        "binance": "LRC/USDT:USDT",
+        "bybit": "LRC/USDT:USDT"
+      },
+      "OCEAN/USDT": {
+        "binance": "OCEAN/USDT:USDT"
+      },
+      "BEL/USDT": {
+        "binance": "BEL/USDT:USDT",
+        "bybit": "BEL/USDT:USDT"
+      },
+      "AXS/USDT": {
+        "binance": "AXS/USDT:USDT",
+        "bybit": "AXS/USDT:USDT"
+      },
+      "ALPHA/USDT": {
+        "binance": "ALPHA/USDT:USDT",
+        "bybit": "ALPHA/USDT:USDT"
+      },
+      "ZEN/USDT": {
+        "binance": "ZEN/USDT:USDT",
+        "bybit": "ZEN/USDT:USDT"
+      },
+      "SKL/USDT": {
+        "binance": "SKL/USDT:USDT",
+        "bybit": "SKL/USDT:USDT"
+      },
+      "GRT/USDT": {
+        "binance": "GRT/USDT:USDT",
+        "bybit": "GRT/USDT:USDT"
+      },
+      "1INCH/USDT": {
+        "binance": "1INCH/USDT:USDT",
+        "bybit": "1INCH/USDT:USDT"
+      },
+      "CHZ/USDT": {
+        "binance": "CHZ/USDT:USDT",
+        "bybit": "CHZ/USDT:USDT"
+      },
+      "SAND/USDT": {
+        "binance": "SAND/USDT:USDT",
+        "bybit": "SAND/USDT:USDT"
+      },
+      "ANKR/USDT": {
+        "binance": "ANKR/USDT:USDT",
+        "bybit": "ANKR/USDT:USDT"
+      },
+      "LIT/USDT": {
+        "binance": "LIT/USDT:USDT"
+      },
+      "UNFI/USDT": {
+        "binance": "UNFI/USDT:USDT"
+      },
+      "REEF/USDT": {
+        "binance": "REEF/USDT:USDT"
+      },
+      "RVN/USDT": {
+        "binance": "RVN/USDT:USDT",
+        "bybit": "RVN/USDT:USDT"
+      },
+      "SFP/USDT": {
+        "binance": "SFP/USDT:USDT",
+        "bybit": "SFP/USDT:USDT"
+      },
+      "XEM/USDT": {
+        "binance": "XEM/USDT:USDT",
+        "bybit": "XEM/USDT:USDT"
+      },
+      "BTCST/USDT": {
+        "binance": "BTCST/USDT:USDT"
+      },
+      "COTI/USDT": {
+        "binance": "COTI/USDT:USDT",
+        "bybit": "COTI/USDT:USDT"
+      },
+      "CHR/USDT": {
+        "binance": "CHR/USDT:USDT",
+        "bybit": "CHR/USDT:USDT"
+      },
+      "MANA/USDT": {
+        "binance": "MANA/USDT:USDT",
+        "bybit": "MANA/USDT:USDT"
+      },
+      "ALICE/USDT": {
+        "binance": "ALICE/USDT:USDT",
+        "bybit": "ALICE/USDT:USDT"
+      },
+      "HBAR/USDT": {
+        "binance": "HBAR/USDT:USDT",
+        "bybit": "HBAR/USDT:USDT"
+      },
+      "ONE/USDT": {
+        "binance": "ONE/USDT:USDT",
+        "bybit": "ONE/USDT:USDT"
+      },
+      "LINA/USDT": {
+        "binance": "LINA/USDT:USDT"
+      },
+      "STMX/USDT": {
+        "binance": "STMX/USDT:USDT"
+      },
+      "DENT/USDT": {
+        "binance": "DENT/USDT:USDT",
+        "bybit": "DENT/USDT:USDT"
+      },
+      "CELR/USDT": {
+        "binance": "CELR/USDT:USDT",
+        "bybit": "CELR/USDT:USDT"
+      },
+      "HOT/USDT": {
+        "binance": "HOT/USDT:USDT",
+        "bybit": "HOT/USDT:USDT"
+      },
+      "MTL/USDT": {
+        "binance": "MTL/USDT:USDT",
+        "bybit": "MTL/USDT:USDT"
+      },
+      "OGN/USDT": {
+        "binance": "OGN/USDT:USDT",
+        "bybit": "OGN/USDT:USDT"
+      },
+      "NKN/USDT": {
+        "binance": "NKN/USDT:USDT",
+        "bybit": "NKN/USDT:USDT"
+      },
+      "SC/USDT": {
+        "binance": "SC/USDT:USDT",
+        "bybit": "SC/USDT:USDT"
+      },
+      "DGB/USDT": {
+        "binance": "DGB/USDT:USDT",
+        "bybit": "DGB/USDT:USDT"
+      },
+      "1000SHIB/USDT": {
+        "binance": "1000SHIB/USDT:USDT"
+      },
+      "BAKE/USDT": {
+        "binance": "BAKE/USDT:USDT",
+        "bybit": "BAKE/USDT:USDT"
+      },
+      "GTC/USDT": {
+        "binance": "GTC/USDT:USDT",
+        "bybit": "GTC/USDT:USDT"
+      },
+      "BTCDOM/USDT": {
+        "binance": "BTCDOM/USDT:USDT"
+      },
+      "IOTX/USDT": {
+        "binance": "IOTX/USDT:USDT",
+        "bybit": "IOTX/USDT:USDT"
+      },
+      "RAY/USDT": {
+        "binance": "RAY/USDT:USDT"
+      },
+      "C98/USDT": {
+        "binance": "C98/USDT:USDT",
+        "bybit": "C98/USDT:USDT"
+      },
+      "MASK/USDT": {
+        "binance": "MASK/USDT:USDT",
+        "bybit": "MASK/USDT:USDT"
+      },
+      "ATA/USDT": {
+        "binance": "ATA/USDT:USDT",
+        "bybit": "ATA/USDT:USDT"
+      },
+      "DYDX/USDT": {
+        "binance": "DYDX/USDT:USDT",
+        "bybit": "DYDX/USDT:USDT"
+      },
+      "1000XEC/USDT": {
+        "binance": "1000XEC/USDT:USDT",
+        "bybit": "1000XEC/USDT:USDT"
+      },
+      "GALA/USDT": {
+        "binance": "GALA/USDT:USDT",
+        "bybit": "GALA/USDT:USDT"
+      },
+      "CELO/USDT": {
+        "binance": "CELO/USDT:USDT",
+        "bybit": "CELO/USDT:USDT"
+      },
+      "AR/USDT": {
+        "binance": "AR/USDT:USDT",
+        "bybit": "AR/USDT:USDT"
+      },
+      "KLAY/USDT": {
+        "binance": "KLAY/USDT:USDT"
+      },
+      "ARPA/USDT": {
+        "binance": "ARPA/USDT:USDT",
+        "bybit": "ARPA/USDT:USDT"
+      },
+      "CTSI/USDT": {
+        "binance": "CTSI/USDT:USDT",
+        "bybit": "CTSI/USDT:USDT"
+      },
+      "LPT/USDT": {
+        "binance": "LPT/USDT:USDT",
+        "bybit": "LPT/USDT:USDT"
+      },
+      "ENS/USDT": {
+        "binance": "ENS/USDT:USDT",
+        "bybit": "ENS/USDT:USDT"
+      },
+      "PEOPLE/USDT": {
+        "binance": "PEOPLE/USDT:USDT",
+        "bybit": "PEOPLE/USDT:USDT"
+      },
+      "ROSE/USDT": {
+        "binance": "ROSE/USDT:USDT",
+        "bybit": "ROSE/USDT:USDT"
+      },
+      "DUSK/USDT": {
+        "binance": "DUSK/USDT:USDT",
+        "bybit": "DUSK/USDT:USDT"
+      },
+      "FLOW/USDT": {
+        "binance": "FLOW/USDT:USDT",
+        "bybit": "FLOW/USDT:USDT"
+      },
+      "IMX/USDT": {
+        "binance": "IMX/USDT:USDT",
+        "bybit": "IMX/USDT:USDT"
+      },
+      "API3/USDT": {
+        "binance": "API3/USDT:USDT",
+        "bybit": "API3/USDT:USDT"
+      },
+      "GMT/USDT": {
+        "binance": "GMT/USDT:USDT",
+        "bybit": "GMT/USDT:USDT"
+      },
+      "APE/USDT": {
+        "binance": "APE/USDT:USDT",
+        "bybit": "APE/USDT:USDT"
+      },
+      "WOO/USDT": {
+        "binance": "WOO/USDT:USDT",
+        "bybit": "WOO/USDT:USDT"
+      },
+      "FTT/USDT": {
+        "binance": "FTT/USDT:USDT"
+      },
+      "JASMY/USDT": {
+        "binance": "JASMY/USDT:USDT",
+        "bybit": "JASMY/USDT:USDT"
+      },
+      "DAR/USDT": {
+        "binance": "DAR/USDT:USDT"
+      },
+      "OP/USDT": {
+        "binance": "OP/USDT:USDT",
+        "bybit": "OP/USDT:USDT"
+      },
+      "INJ/USDT": {
+        "binance": "INJ/USDT:USDT",
+        "bybit": "INJ/USDT:USDT"
+      },
+      "STG/USDT": {
+        "binance": "STG/USDT:USDT",
+        "bybit": "STG/USDT:USDT"
+      },
+      "SPELL/USDT": {
+        "binance": "SPELL/USDT:USDT",
+        "bybit": "SPELL/USDT:USDT"
+      },
+      "1000LUNC/USDT": {
+        "binance": "1000LUNC/USDT:USDT",
+        "bybit": "1000LUNC/USDT:USDT"
+      },
+      "LUNA2/USDT": {
+        "binance": "LUNA2/USDT:USDT",
+        "bybit": "LUNA2/USDT:USDT"
+      },
+      "LDO/USDT": {
+        "binance": "LDO/USDT:USDT",
+        "bybit": "LDO/USDT:USDT"
+      },
+      "CVX/USDT": {
+        "binance": "CVX/USDT:USDT",
+        "bybit": "CVX/USDT:USDT"
+      },
+      "ICP/USDT": {
+        "binance": "ICP/USDT:USDT",
+        "bybit": "ICP/USDT:USDT"
+      },
+      "APT/USDT": {
+        "binance": "APT/USDT:USDT",
+        "bybit": "APT/USDT:USDT"
+      },
+      "QNT/USDT": {
+        "binance": "QNT/USDT:USDT",
+        "bybit": "QNT/USDT:USDT"
+      },
+      "FET/USDT": {
+        "binance": "FET/USDT:USDT"
+      },
+      "FXS/USDT": {
+        "binance": "FXS/USDT:USDT",
+        "bybit": "FXS/USDT:USDT"
+      },
+      "HOOK/USDT": {
+        "binance": "HOOK/USDT:USDT",
+        "bybit": "HOOK/USDT:USDT"
+      },
+      "MAGIC/USDT": {
+        "binance": "MAGIC/USDT:USDT",
+        "bybit": "MAGIC/USDT:USDT"
+      },
+      "T/USDT": {
+        "binance": "T/USDT:USDT",
+        "bybit": "T/USDT:USDT"
+      },
+      "HIGH/USDT": {
+        "binance": "HIGH/USDT:USDT",
+        "bybit": "HIGH/USDT:USDT"
+      },
+      "MINA/USDT": {
+        "binance": "MINA/USDT:USDT",
+        "bybit": "MINA/USDT:USDT"
+      },
+      "ASTR/USDT": {
+        "binance": "ASTR/USDT:USDT",
+        "bybit": "ASTR/USDT:USDT"
+      },
+      "AGIX/USDT": {
+        "binance": "AGIX/USDT:USDT"
+      },
+      "PHB/USDT": {
+        "binance": "PHB/USDT:USDT",
+        "bybit": "PHB/USDT:USDT"
+      },
+      "GMX/USDT": {
+        "binance": "GMX/USDT:USDT",
+        "bybit": "GMX/USDT:USDT"
+      },
+      "CFX/USDT": {
+        "binance": "CFX/USDT:USDT",
+        "bybit": "CFX/USDT:USDT"
+      },
+      "STX/USDT": {
+        "binance": "STX/USDT:USDT",
+        "bybit": "STX/USDT:USDT"
+      },
+      "BNX/USDT": {
+        "binance": "BNX/USDT:USDT"
+      },
+      "ACH/USDT": {
+        "binance": "ACH/USDT:USDT",
+        "bybit": "ACH/USDT:USDT"
+      },
+      "SSV/USDT": {
+        "binance": "SSV/USDT:USDT",
+        "bybit": "SSV/USDT:USDT"
+      },
+      "CKB/USDT": {
+        "binance": "CKB/USDT:USDT",
+        "bybit": "CKB/USDT:USDT"
+      },
+      "PERP/USDT": {
+        "binance": "PERP/USDT:USDT",
+        "bybit": "PERP/USDT:USDT"
+      },
+      "TRU/USDT": {
+        "binance": "TRU/USDT:USDT",
+        "bybit": "TRU/USDT:USDT"
+      },
+      "LQTY/USDT": {
+        "binance": "LQTY/USDT:USDT",
+        "bybit": "LQTY/USDT:USDT"
+      },
+      "USDC/USDT": {
+        "binance": "USDC/USDT:USDT",
+        "bybit": "USDC/USDT:USDT"
+      },
+      "ID/USDT": {
+        "binance": "ID/USDT:USDT",
+        "bybit": "ID/USDT:USDT"
+      },
+      "ARB/USDT": {
+        "binance": "ARB/USDT:USDT",
+        "bybit": "ARB/USDT:USDT"
+      },
+      "JOE/USDT": {
+        "binance": "JOE/USDT:USDT",
+        "bybit": "JOE/USDT:USDT"
+      },
+      "TLM/USDT": {
+        "binance": "TLM/USDT:USDT",
+        "bybit": "TLM/USDT:USDT"
+      },
+      "AMB/USDT": {
+        "binance": "AMB/USDT:USDT"
+      },
+      "LEVER/USDT": {
+        "binance": "LEVER/USDT:USDT",
+        "bybit": "LEVER/USDT:USDT"
+      },
+      "RDNT/USDT": {
+        "binance": "RDNT/USDT:USDT",
+        "bybit": "RDNT/USDT:USDT"
+      },
+      "HFT/USDT": {
+        "binance": "HFT/USDT:USDT",
+        "bybit": "HFT/USDT:USDT"
+      },
+      "XVS/USDT": {
+        "binance": "XVS/USDT:USDT",
+        "bybit": "XVS/USDT:USDT"
+      },
+      "BLUR/USDT": {
+        "binance": "BLUR/USDT:USDT",
+        "bybit": "BLUR/USDT:USDT"
+      },
+      "EDU/USDT": {
+        "binance": "EDU/USDT:USDT",
+        "bybit": "EDU/USDT:USDT"
+      },
+      "IDEX/USDT": {
+        "binance": "IDEX/USDT:USDT",
+        "bybit": "IDEX/USDT:USDT"
+      },
+      "SUI/USDT": {
+        "binance": "SUI/USDT:USDT",
+        "bybit": "SUI/USDT:USDT"
+      },
+      "1000PEPE/USDT": {
+        "binance": "1000PEPE/USDT:USDT",
+        "bybit": "1000PEPE/USDT:USDT"
+      },
+      "1000FLOKI/USDT": {
+        "binance": "1000FLOKI/USDT:USDT",
+        "bybit": "1000FLOKI/USDT:USDT"
+      },
+      "UMA/USDT": {
+        "binance": "UMA/USDT:USDT",
+        "bybit": "UMA/USDT:USDT"
+      },
+      "RAD/USDT": {
+        "binance": "RAD/USDT:USDT",
+        "bybit": "RAD/USDT:USDT"
+      },
+      "KEY/USDT": {
+        "binance": "KEY/USDT:USDT"
+      },
+      "COMBO/USDT": {
+        "binance": "COMBO/USDT:USDT"
+      },
+      "NMR/USDT": {
+        "binance": "NMR/USDT:USDT",
+        "bybit": "NMR/USDT:USDT"
+      },
+      "MAV/USDT": {
+        "binance": "MAV/USDT:USDT",
+        "bybit": "MAV/USDT:USDT"
+      },
+      "MDT/USDT": {
+        "binance": "MDT/USDT:USDT",
+        "bybit": "MDT/USDT:USDT"
+      },
+      "XVG/USDT": {
+        "binance": "XVG/USDT:USDT",
+        "bybit": "XVG/USDT:USDT"
+      },
+      "WLD/USDT": {
+        "binance": "WLD/USDT:USDT",
+        "bybit": "WLD/USDT:USDT"
+      },
+      "PENDLE/USDT": {
+        "binance": "PENDLE/USDT:USDT",
+        "bybit": "PENDLE/USDT:USDT"
+      },
+      "ARKM/USDT": {
+        "binance": "ARKM/USDT:USDT",
+        "bybit": "ARKM/USDT:USDT"
+      },
+      "AGLD/USDT": {
+        "binance": "AGLD/USDT:USDT",
+        "bybit": "AGLD/USDT:USDT"
+      },
+      "YGG/USDT": {
+        "binance": "YGG/USDT:USDT",
+        "bybit": "YGG/USDT:USDT"
+      },
+      "DODOX/USDT": {
+        "binance": "DODOX/USDT:USDT"
+      },
+      "BNT/USDT": {
+        "binance": "BNT/USDT:USDT",
+        "bybit": "BNT/USDT:USDT"
+      },
+      "OXT/USDT": {
+        "binance": "OXT/USDT:USDT",
+        "bybit": "OXT/USDT:USDT"
+      },
+      "SEI/USDT": {
+        "binance": "SEI/USDT:USDT",
+        "bybit": "SEI/USDT:USDT"
+      },
+      "CYBER/USDT": {
+        "binance": "CYBER/USDT:USDT",
+        "bybit": "CYBER/USDT:USDT"
+      },
+      "HIFI/USDT": {
+        "binance": "HIFI/USDT:USDT",
+        "bybit": "HIFI/USDT:USDT"
+      },
+      "ARK/USDT": {
+        "binance": "ARK/USDT:USDT",
+        "bybit": "ARK/USDT:USDT"
+      },
+      "GLMR/USDT": {
+        "binance": "GLMR/USDT:USDT",
+        "bybit": "GLMR/USDT:USDT"
+      },
+      "BICO/USDT": {
+        "binance": "BICO/USDT:USDT",
+        "bybit": "BICO/USDT:USDT"
+      },
+      "STRAX/USDT": {
+        "binance": "STRAX/USDT:USDT"
+      },
+      "LOOM/USDT": {
+        "binance": "LOOM/USDT:USDT"
+      },
+      "BIGTIME/USDT": {
+        "binance": "BIGTIME/USDT:USDT",
+        "bybit": "BIGTIME/USDT:USDT"
+      },
+      "BOND/USDT": {
+        "binance": "BOND/USDT:USDT"
+      },
+      "ORBS/USDT": {
+        "binance": "ORBS/USDT:USDT",
+        "bybit": "ORBS/USDT:USDT"
+      },
+      "STPT/USDT": {
+        "binance": "STPT/USDT:USDT"
+      },
+      "WAXP/USDT": {
+        "binance": "WAXP/USDT:USDT",
+        "bybit": "WAXP/USDT:USDT"
+      },
+      "BSV/USDT": {
+        "binance": "BSV/USDT:USDT",
+        "bybit": "BSV/USDT:USDT"
+      },
+      "RIF/USDT": {
+        "binance": "RIF/USDT:USDT",
+        "bybit": "RIF/USDT:USDT"
+      },
+      "POLYX/USDT": {
+        "binance": "POLYX/USDT:USDT",
+        "bybit": "POLYX/USDT:USDT"
+      },
+      "GAS/USDT": {
+        "binance": "GAS/USDT:USDT",
+        "bybit": "GAS/USDT:USDT"
+      },
+      "POWR/USDT": {
+        "binance": "POWR/USDT:USDT",
+        "bybit": "POWR/USDT:USDT"
+      },
+      "SLP/USDT": {
+        "binance": "SLP/USDT:USDT",
+        "bybit": "SLP/USDT:USDT"
+      },
+      "TIA/USDT": {
+        "binance": "TIA/USDT:USDT",
+        "bybit": "TIA/USDT:USDT"
+      },
+      "SNT/USDT": {
+        "binance": "SNT/USDT:USDT",
+        "bybit": "SNT/USDT:USDT"
+      },
+      "CAKE/USDT": {
+        "binance": "CAKE/USDT:USDT",
+        "bybit": "CAKE/USDT:USDT"
+      },
+      "MEME/USDT": {
+        "binance": "MEME/USDT:USDT",
+        "bybit": "MEME/USDT:USDT"
+      },
+      "TWT/USDT": {
+        "binance": "TWT/USDT:USDT",
+        "bybit": "TWT/USDT:USDT"
+      },
+      "TOKEN/USDT": {
+        "binance": "TOKEN/USDT:USDT",
+        "bybit": "TOKEN/USDT:USDT"
+      },
+      "ORDI/USDT": {
+        "binance": "ORDI/USDT:USDT",
+        "bybit": "ORDI/USDT:USDT"
+      },
+      "STEEM/USDT": {
+        "binance": "STEEM/USDT:USDT",
+        "bybit": "STEEM/USDT:USDT"
+      },
+      "BADGER/USDT": {
+        "binance": "BADGER/USDT:USDT",
+        "bybit": "BADGER/USDT:USDT"
+      },
+      "ILV/USDT": {
+        "binance": "ILV/USDT:USDT",
+        "bybit": "ILV/USDT:USDT"
+      },
+      "NTRN/USDT": {
+        "binance": "NTRN/USDT:USDT",
+        "bybit": "NTRN/USDT:USDT"
+      },
+      "KAS/USDT": {
+        "binance": "KAS/USDT:USDT",
+        "bybit": "KAS/USDT:USDT"
+      },
+      "BEAMX/USDT": {
+        "binance": "BEAMX/USDT:USDT"
+      },
+      "1000BONK/USDT": {
+        "binance": "1000BONK/USDT:USDT",
+        "bybit": "1000BONK/USDT:USDT"
+      },
+      "PYTH/USDT": {
+        "binance": "PYTH/USDT:USDT",
+        "bybit": "PYTH/USDT:USDT"
+      },
+      "SUPER/USDT": {
+        "binance": "SUPER/USDT:USDT",
+        "bybit": "SUPER/USDT:USDT"
+      },
+      "USTC/USDT": {
+        "binance": "USTC/USDT:USDT",
+        "bybit": "USTC/USDT:USDT"
+      },
+      "ONG/USDT": {
+        "binance": "ONG/USDT:USDT",
+        "bybit": "ONG/USDT:USDT"
+      },
+      "ETHW/USDT": {
+        "binance": "ETHW/USDT:USDT",
+        "bybit": "ETHW/USDT:USDT"
+      },
+      "JTO/USDT": {
+        "binance": "JTO/USDT:USDT",
+        "bybit": "JTO/USDT:USDT"
+      },
+      "1000SATS/USDT": {
+        "binance": "1000SATS/USDT:USDT"
+      },
+      "AUCTION/USDT": {
+        "binance": "AUCTION/USDT:USDT",
+        "bybit": "AUCTION/USDT:USDT"
+      },
+      "1000RATS/USDT": {
+        "binance": "1000RATS/USDT:USDT",
+        "bybit": "1000RATS/USDT:USDT"
+      },
+      "ACE/USDT": {
+        "binance": "ACE/USDT:USDT",
+        "bybit": "ACE/USDT:USDT"
+      },
+      "MOVR/USDT": {
+        "binance": "MOVR/USDT:USDT",
+        "bybit": "MOVR/USDT:USDT"
+      },
+      "NFP/USDT": {
+        "binance": "NFP/USDT:USDT",
+        "bybit": "NFP/USDT:USDT"
+      },
+      "AI/USDT": {
+        "binance": "AI/USDT:USDT",
+        "bybit": "AI/USDT:USDT"
+      },
+      "XAI/USDT": {
+        "binance": "XAI/USDT:USDT",
+        "bybit": "XAI/USDT:USDT"
+      },
+      "WIF/USDT": {
+        "binance": "WIF/USDT:USDT",
+        "bybit": "WIF/USDT:USDT"
+      },
+      "MANTA/USDT": {
+        "binance": "MANTA/USDT:USDT",
+        "bybit": "MANTA/USDT:USDT"
+      },
+      "ONDO/USDT": {
+        "binance": "ONDO/USDT:USDT",
+        "bybit": "ONDO/USDT:USDT"
+      },
+      "LSK/USDT": {
+        "binance": "LSK/USDT:USDT",
+        "bybit": "LSK/USDT:USDT"
+      },
+      "ALT/USDT": {
+        "binance": "ALT/USDT:USDT",
+        "bybit": "ALT/USDT:USDT"
+      },
+      "JUP/USDT": {
+        "binance": "JUP/USDT:USDT",
+        "bybit": "JUP/USDT:USDT"
+      },
+      "ZETA/USDT": {
+        "binance": "ZETA/USDT:USDT",
+        "bybit": "ZETA/USDT:USDT"
+      },
+      "RONIN/USDT": {
+        "binance": "RONIN/USDT:USDT",
+        "bybit": "RONIN/USDT:USDT"
+      },
+      "DYM/USDT": {
+        "binance": "DYM/USDT:USDT",
+        "bybit": "DYM/USDT:USDT"
+      },
+      "OM/USDT": {
+        "binance": "OM/USDT:USDT",
+        "bybit": "OM/USDT:USDT"
+      },
+      "PIXEL/USDT": {
+        "binance": "PIXEL/USDT:USDT",
+        "bybit": "PIXEL/USDT:USDT"
+      },
+      "STRK/USDT": {
+        "binance": "STRK/USDT:USDT",
+        "bybit": "STRK/USDT:USDT"
+      },
+      "GLM/USDT": {
+        "binance": "GLM/USDT:USDT",
+        "bybit": "GLM/USDT:USDT"
+      },
+      "PORTAL/USDT": {
+        "binance": "PORTAL/USDT:USDT",
+        "bybit": "PORTAL/USDT:USDT"
+      },
+      "TON/USDT": {
+        "binance": "TON/USDT:USDT",
+        "bybit": "TON/USDT:USDT"
+      },
+      "AXL/USDT": {
+        "binance": "AXL/USDT:USDT",
+        "bybit": "AXL/USDT:USDT"
+      },
+      "MYRO/USDT": {
+        "binance": "MYRO/USDT:USDT",
+        "bybit": "MYRO/USDT:USDT"
+      },
+      "METIS/USDT": {
+        "binance": "METIS/USDT:USDT",
+        "bybit": "METIS/USDT:USDT"
+      },
+      "AEVO/USDT": {
+        "binance": "AEVO/USDT:USDT",
+        "bybit": "AEVO/USDT:USDT"
+      },
+      "VANRY/USDT": {
+        "binance": "VANRY/USDT:USDT",
+        "bybit": "VANRY/USDT:USDT"
+      },
+      "BOME/USDT": {
+        "binance": "BOME/USDT:USDT",
+        "bybit": "BOME/USDT:USDT"
+      },
+      "ETHFI/USDT": {
+        "binance": "ETHFI/USDT:USDT",
+        "bybit": "ETHFI/USDT:USDT"
+      },
+      "ENA/USDT": {
+        "binance": "ENA/USDT:USDT",
+        "bybit": "ENA/USDT:USDT"
+      },
+      "W/USDT": {
+        "binance": "W/USDT:USDT",
+        "bybit": "W/USDT:USDT"
+      },
+      "TNSR/USDT": {
+        "binance": "TNSR/USDT:USDT",
+        "bybit": "TNSR/USDT:USDT"
+      },
+      "SAGA/USDT": {
+        "binance": "SAGA/USDT:USDT",
+        "bybit": "SAGA/USDT:USDT"
+      },
+      "TAO/USDT": {
+        "binance": "TAO/USDT:USDT",
+        "bybit": "TAO/USDT:USDT"
+      },
+      "OMNI/USDT": {
+        "binance": "OMNI/USDT:USDT",
+        "bybit": "OMNI/USDT:USDT"
+      },
+      "REZ/USDT": {
+        "binance": "REZ/USDT:USDT",
+        "bybit": "REZ/USDT:USDT"
+      },
+      "BB/USDT": {
+        "binance": "BB/USDT:USDT",
+        "bybit": "BB/USDT:USDT"
+      },
+      "NOT/USDT": {
+        "binance": "NOT/USDT:USDT",
+        "bybit": "NOT/USDT:USDT"
+      },
+      "TURBO/USDT": {
+        "binance": "TURBO/USDT:USDT"
+      },
+      "IO/USDT": {
+        "binance": "IO/USDT:USDT",
+        "bybit": "IO/USDT:USDT"
+      },
+      "ZK/USDT": {
+        "binance": "ZK/USDT:USDT",
+        "bybit": "ZK/USDT:USDT"
+      },
+      "MEW/USDT": {
+        "binance": "MEW/USDT:USDT",
+        "bybit": "MEW/USDT:USDT"
+      },
+      "LISTA/USDT": {
+        "binance": "LISTA/USDT:USDT",
+        "bybit": "LISTA/USDT:USDT"
+      },
+      "ZRO/USDT": {
+        "binance": "ZRO/USDT:USDT",
+        "bybit": "ZRO/USDT:USDT"
+      },
+      "RENDER/USDT": {
+        "binance": "RENDER/USDT:USDT",
+        "bybit": "RENDER/USDT:USDT"
+      },
+      "BANANA/USDT": {
+        "binance": "BANANA/USDT:USDT",
+        "bybit": "BANANA/USDT:USDT"
+      },
+      "RARE/USDT": {
+        "binance": "RARE/USDT:USDT",
+        "bybit": "RARE/USDT:USDT"
+      },
+      "G/USDT": {
+        "binance": "G/USDT:USDT",
+        "bybit": "G/USDT:USDT"
+      },
+      "SYN/USDT": {
+        "binance": "SYN/USDT:USDT",
+        "bybit": "SYN/USDT:USDT"
+      },
+      "SYS/USDT": {
+        "binance": "SYS/USDT:USDT",
+        "bybit": "SYS/USDT:USDT"
+      },
+      "VOXEL/USDT": {
+        "binance": "VOXEL/USDT:USDT",
+        "bybit": "VOXEL/USDT:USDT"
+      },
+      "BRETT/USDT": {
+        "binance": "BRETT/USDT:USDT",
+        "bybit": "BRETT/USDT:USDT"
+      },
+      "ALPACA/USDT": {
+        "binance": "ALPACA/USDT:USDT"
+      },
+      "POPCAT/USDT": {
+        "binance": "POPCAT/USDT:USDT",
+        "bybit": "POPCAT/USDT:USDT"
+      },
+      "SUN/USDT": {
+        "binance": "SUN/USDT:USDT",
+        "bybit": "SUN/USDT:USDT"
+      },
+      "VIDT/USDT": {
+        "binance": "VIDT/USDT:USDT"
+      },
+      "NULS/USDT": {
+        "binance": "NULS/USDT:USDT"
+      },
+      "DOGS/USDT": {
+        "binance": "DOGS/USDT:USDT",
+        "bybit": "DOGS/USDT:USDT"
+      },
+      "MBOX/USDT": {
+        "binance": "MBOX/USDT:USDT",
+        "bybit": "MBOX/USDT:USDT"
+      },
+      "CHESS/USDT": {
+        "binance": "CHESS/USDT:USDT",
+        "bybit": "CHESS/USDT:USDT"
+      },
+      "FLUX/USDT": {
+        "binance": "FLUX/USDT:USDT",
+        "bybit": "FLUX/USDT:USDT"
+      },
+      "BSW/USDT": {
+        "binance": "BSW/USDT:USDT",
+        "bybit": "BSW/USDT:USDT"
+      },
+      "QUICK/USDT": {
+        "binance": "QUICK/USDT:USDT",
+        "bybit": "QUICK/USDT:USDT"
+      },
+      "NEIROETH/USDT": {
+        "binance": "NEIROETH/USDT:USDT",
+        "bybit": "NEIROETH/USDT:USDT"
+      },
+      "RPL/USDT": {
+        "binance": "RPL/USDT:USDT",
+        "bybit": "RPL/USDT:USDT"
+      },
+      "POL/USDT": {
+        "binance": "POL/USDT:USDT",
+        "bybit": "POL/USDT:USDT"
+      },
+      "UXLINK/USDT": {
+        "binance": "UXLINK/USDT:USDT",
+        "bybit": "UXLINK/USDT:USDT"
+      },
+      "1MBABYDOGE/USDT": {
+        "binance": "1MBABYDOGE/USDT:USDT"
+      },
+      "NEIRO/USDT": {
+        "binance": "NEIRO/USDT:USDT"
+      },
+      "KDA/USDT": {
+        "binance": "KDA/USDT:USDT",
+        "bybit": "KDA/USDT:USDT"
+      },
+      "FIDA/USDT": {
+        "binance": "FIDA/USDT:USDT",
+        "bybit": "FIDA/USDT:USDT"
+      },
+      "FIO/USDT": {
+        "binance": "FIO/USDT:USDT",
+        "bybit": "FIO/USDT:USDT"
+      },
+      "CATI/USDT": {
+        "binance": "CATI/USDT:USDT",
+        "bybit": "CATI/USDT:USDT"
+      },
+      "GHST/USDT": {
+        "binance": "GHST/USDT:USDT"
+      },
+      "LOKA/USDT": {
+        "binance": "LOKA/USDT:USDT"
+      },
+      "HMSTR/USDT": {
+        "binance": "HMSTR/USDT:USDT",
+        "bybit": "HMSTR/USDT:USDT"
+      },
+      "REI/USDT": {
+        "binance": "REI/USDT:USDT"
+      },
+      "COS/USDT": {
+        "binance": "COS/USDT:USDT",
+        "bybit": "COS/USDT:USDT"
+      },
+      "EIGEN/USDT": {
+        "binance": "EIGEN/USDT:USDT",
+        "bybit": "EIGEN/USDT:USDT"
+      },
+      "DIA/USDT": {
+        "binance": "DIA/USDT:USDT"
+      },
+      "1000CAT/USDT": {
+        "binance": "1000CAT/USDT:USDT",
+        "bybit": "1000CAT/USDT:USDT"
+      },
+      "SCR/USDT": {
+        "binance": "SCR/USDT:USDT",
+        "bybit": "SCR/USDT:USDT"
+      },
+      "GOAT/USDT": {
+        "binance": "GOAT/USDT:USDT",
+        "bybit": "GOAT/USDT:USDT"
+      },
+      "MOODENG/USDT": {
+        "binance": "MOODENG/USDT:USDT",
+        "bybit": "MOODENG/USDT:USDT"
+      },
+      "SAFE/USDT": {
+        "binance": "SAFE/USDT:USDT",
+        "bybit": "SAFE/USDT:USDT"
+      },
+      "SANTOS/USDT": {
+        "binance": "SANTOS/USDT:USDT"
+      },
+      "TROY/USDT": {
+        "binance": "TROY/USDT:USDT"
+      },
+      "PONKE/USDT": {
+        "binance": "PONKE/USDT:USDT",
+        "bybit": "PONKE/USDT:USDT"
+      },
+      "COW/USDT": {
+        "binance": "COW/USDT:USDT",
+        "bybit": "COW/USDT:USDT"
+      },
+      "CETUS/USDT": {
+        "binance": "CETUS/USDT:USDT",
+        "bybit": "CETUS/USDT:USDT"
+      },
+      "1000000MOG/USDT": {
+        "binance": "1000000MOG/USDT:USDT",
+        "bybit": "1000000MOG/USDT:USDT"
+      },
+      "GRASS/USDT": {
+        "binance": "GRASS/USDT:USDT",
+        "bybit": "GRASS/USDT:USDT"
+      },
+      "DRIFT/USDT": {
+        "binance": "DRIFT/USDT:USDT",
+        "bybit": "DRIFT/USDT:USDT"
+      },
+      "SWELL/USDT": {
+        "binance": "SWELL/USDT:USDT",
+        "bybit": "SWELL/USDT:USDT"
+      },
+      "ACT/USDT": {
+        "binance": "ACT/USDT:USDT",
+        "bybit": "ACT/USDT:USDT"
+      },
+      "PNUT/USDT": {
+        "binance": "PNUT/USDT:USDT",
+        "bybit": "PNUT/USDT:USDT"
+      },
+      "HIPPO/USDT": {
+        "binance": "HIPPO/USDT:USDT",
+        "bybit": "HIPPO/USDT:USDT"
+      },
+      "1000X/USDT": {
+        "binance": "1000X/USDT:USDT",
+        "bybit": "1000X/USDT:USDT"
+      },
+      "DEGEN/USDT": {
+        "binance": "DEGEN/USDT:USDT",
+        "bybit": "DEGEN/USDT:USDT"
+      },
+      "BAN/USDT": {
+        "binance": "BAN/USDT:USDT",
+        "bybit": "BAN/USDT:USDT"
+      },
+      "AKT/USDT": {
+        "binance": "AKT/USDT:USDT",
+        "bybit": "AKT/USDT:USDT"
+      },
+      "SLERF/USDT": {
+        "binance": "SLERF/USDT:USDT",
+        "bybit": "SLERF/USDT:USDT"
+      },
+      "SCRT/USDT": {
+        "binance": "SCRT/USDT:USDT",
+        "bybit": "SCRT/USDT:USDT"
+      },
+      "1000CHEEMS/USDT": {
+        "binance": "1000CHEEMS/USDT:USDT"
+      },
+      "1000WHY/USDT": {
+        "binance": "1000WHY/USDT:USDT"
+      },
+      "THE/USDT": {
+        "binance": "THE/USDT:USDT",
+        "bybit": "THE/USDT:USDT"
+      },
+      "MORPHO/USDT": {
+        "binance": "MORPHO/USDT:USDT",
+        "bybit": "MORPHO/USDT:USDT"
+      },
+      "CHILLGUY/USDT": {
+        "binance": "CHILLGUY/USDT:USDT",
+        "bybit": "CHILLGUY/USDT:USDT"
+      },
+      "KAIA/USDT": {
+        "binance": "KAIA/USDT:USDT",
+        "bybit": "KAIA/USDT:USDT"
+      },
+      "AERO/USDT": {
+        "binance": "AERO/USDT:USDT",
+        "bybit": "AERO/USDT:USDT"
+      },
+      "ACX/USDT": {
+        "binance": "ACX/USDT:USDT",
+        "bybit": "ACX/USDT:USDT"
+      },
+      "ORCA/USDT": {
+        "binance": "ORCA/USDT:USDT",
+        "bybit": "ORCA/USDT:USDT"
+      },
+      "MOVE/USDT": {
+        "binance": "MOVE/USDT:USDT",
+        "bybit": "MOVE/USDT:USDT"
+      },
+      "RAYSOL/USDT": {
+        "binance": "RAYSOL/USDT:USDT"
+      },
+      "KOMA/USDT": {
+        "binance": "KOMA/USDT:USDT",
+        "bybit": "KOMA/USDT:USDT"
+      },
+      "VIRTUAL/USDT": {
+        "binance": "VIRTUAL/USDT:USDT",
+        "bybit": "VIRTUAL/USDT:USDT"
+      },
+      "SPX/USDT": {
+        "binance": "SPX/USDT:USDT",
+        "bybit": "SPX/USDT:USDT"
+      },
+      "ME/USDT": {
+        "binance": "ME/USDT:USDT",
+        "bybit": "ME/USDT:USDT"
+      },
+      "AVA/USDT": {
+        "binance": "AVA/USDT:USDT",
+        "bybit": "AVA/USDT:USDT"
+      },
+      "DEGO/USDT": {
+        "binance": "DEGO/USDT:USDT"
+      },
+      "VELODROME/USDT": {
+        "binance": "VELODROME/USDT:USDT",
+        "bybit": "VELODROME/USDT:USDT"
+      },
+      "MOCA/USDT": {
+        "binance": "MOCA/USDT:USDT",
+        "bybit": "MOCA/USDT:USDT"
+      },
+      "VANA/USDT": {
+        "binance": "VANA/USDT:USDT",
+        "bybit": "VANA/USDT:USDT"
+      },
+      "PENGU/USDT": {
+        "binance": "PENGU/USDT:USDT",
+        "bybit": "PENGU/USDT:USDT"
+      },
+      "LUMIA/USDT": {
+        "binance": "LUMIA/USDT:USDT",
+        "bybit": "LUMIA/USDT:USDT"
+      },
+      "USUAL/USDT": {
+        "binance": "USUAL/USDT:USDT",
+        "bybit": "USUAL/USDT:USDT"
+      },
+      "AIXBT/USDT": {
+        "binance": "AIXBT/USDT:USDT",
+        "bybit": "AIXBT/USDT:USDT"
+      },
+      "FARTCOIN/USDT": {
+        "binance": "FARTCOIN/USDT:USDT",
+        "bybit": "FARTCOIN/USDT:USDT"
+      },
+      "KMNO/USDT": {
+        "binance": "KMNO/USDT:USDT",
+        "bybit": "KMNO/USDT:USDT"
+      },
+      "CGPT/USDT": {
+        "binance": "CGPT/USDT:USDT",
+        "bybit": "CGPT/USDT:USDT"
+      },
+      "HIVE/USDT": {
+        "binance": "HIVE/USDT:USDT",
+        "bybit": "HIVE/USDT:USDT"
+      },
+      "DEXE/USDT": {
+        "binance": "DEXE/USDT:USDT",
+        "bybit": "DEXE/USDT:USDT"
+      },
+      "PHA/USDT": {
+        "binance": "PHA/USDT:USDT",
+        "bybit": "PHA/USDT:USDT"
+      },
+      "DF/USDT": {
+        "binance": "DF/USDT:USDT"
+      },
+      "GRIFFAIN/USDT": {
+        "binance": "GRIFFAIN/USDT:USDT",
+        "bybit": "GRIFFAIN/USDT:USDT"
+      },
+      "AI16Z/USDT": {
+        "binance": "AI16Z/USDT:USDT",
+        "bybit": "AI16Z/USDT:USDT"
+      },
+      "ZEREBRO/USDT": {
+        "binance": "ZEREBRO/USDT:USDT",
+        "bybit": "ZEREBRO/USDT:USDT"
+      },
+      "BIO/USDT": {
+        "binance": "BIO/USDT:USDT",
+        "bybit": "BIO/USDT:USDT"
+      },
+      "COOKIE/USDT": {
+        "binance": "COOKIE/USDT:USDT",
+        "bybit": "COOKIE/USDT:USDT"
+      },
+      "ALCH/USDT": {
+        "binance": "ALCH/USDT:USDT",
+        "bybit": "ALCH/USDT:USDT"
+      },
+      "SWARMS/USDT": {
+        "binance": "SWARMS/USDT:USDT",
+        "bybit": "SWARMS/USDT:USDT"
+      },
+      "SONIC/USDT": {
+        "binance": "SONIC/USDT:USDT",
+        "bybit": "SONIC/USDT:USDT"
+      },
+      "D/USDT": {
+        "binance": "D/USDT:USDT"
+      },
+      "PROM/USDT": {
+        "binance": "PROM/USDT:USDT",
+        "bybit": "PROM/USDT:USDT"
+      },
+      "S/USDT": {
+        "binance": "S/USDT:USDT",
+        "bybit": "S/USDT:USDT"
+      },
+      "SOLV/USDT": {
+        "binance": "SOLV/USDT:USDT",
+        "bybit": "SOLV/USDT:USDT"
+      },
+      "ARC/USDT": {
+        "binance": "ARC/USDT:USDT",
+        "bybit": "ARC/USDT:USDT"
+      },
+      "AVAAI/USDT": {
+        "binance": "AVAAI/USDT:USDT",
+        "bybit": "AVAAI/USDT:USDT"
+      },
+      "TRUMP/USDT": {
+        "binance": "TRUMP/USDT:USDT",
+        "bybit": "TRUMP/USDT:USDT"
+      },
+      "MELANIA/USDT": {
+        "binance": "MELANIA/USDT:USDT",
+        "bybit": "MELANIA/USDT:USDT"
+      },
+      "VTHO/USDT": {
+        "binance": "VTHO/USDT:USDT",
+        "bybit": "VTHO/USDT:USDT"
+      },
+      "ANIME/USDT": {
+        "binance": "ANIME/USDT:USDT",
+        "bybit": "ANIME/USDT:USDT"
+      },
+      "VINE/USDT": {
+        "binance": "VINE/USDT:USDT",
+        "bybit": "VINE/USDT:USDT"
+      },
+      "PIPPIN/USDT": {
+        "binance": "PIPPIN/USDT:USDT",
+        "bybit": "PIPPIN/USDT:USDT"
+      },
+      "VVV/USDT": {
+        "binance": "VVV/USDT:USDT",
+        "bybit": "VVV/USDT:USDT"
+      },
+      "BERA/USDT": {
+        "binance": "BERA/USDT:USDT",
+        "bybit": "BERA/USDT:USDT"
+      },
+      "TST/USDT": {
+        "binance": "TST/USDT:USDT"
+      },
+      "LAYER/USDT": {
+        "binance": "LAYER/USDT:USDT"
+      },
+      "HEI/USDT": {
+        "binance": "HEI/USDT:USDT",
+        "bybit": "HEI/USDT:USDT"
+      },
+      "B3/USDT": {
+        "binance": "B3/USDT:USDT",
+        "bybit": "B3/USDT:USDT"
+      },
+      "IP/USDT": {
+        "binance": "IP/USDT:USDT",
+        "bybit": "IP/USDT:USDT"
+      },
+      "GPS/USDT": {
+        "binance": "GPS/USDT:USDT",
+        "bybit": "GPS/USDT:USDT"
+      },
+      "SHELL/USDT": {
+        "binance": "SHELL/USDT:USDT",
+        "bybit": "SHELL/USDT:USDT"
+      },
+      "KAITO/USDT": {
+        "binance": "KAITO/USDT:USDT",
+        "bybit": "KAITO/USDT:USDT"
+      },
+      "RED/USDT": {
+        "binance": "RED/USDT:USDT",
+        "bybit": "RED/USDT:USDT"
+      },
+      "VIC/USDT": {
+        "binance": "VIC/USDT:USDT",
+        "bybit": "VIC/USDT:USDT"
+      },
+      "EPIC/USDT": {
+        "binance": "EPIC/USDT:USDT",
+        "bybit": "EPIC/USDT:USDT"
+      },
+      "BMT/USDT": {
+        "binance": "BMT/USDT:USDT",
+        "bybit": "BMT/USDT:USDT"
+      },
+      "MUBARAK/USDT": {
+        "binance": "MUBARAK/USDT:USDT",
+        "bybit": "MUBARAK/USDT:USDT"
+      },
+      "FORM/USDT": {
+        "binance": "FORM/USDT:USDT",
+        "bybit": "FORM/USDT:USDT"
+      },
+      "BID/USDT": {
+        "binance": "BID/USDT:USDT"
+      },
+      "TUT/USDT": {
+        "binance": "TUT/USDT:USDT",
+        "bybit": "TUT/USDT:USDT"
+      },
+      "BROCCOLI714/USDT": {
+        "binance": "BROCCOLI714/USDT:USDT"
+      },
+      "BROCCOLIF3B/USDT": {
+        "binance": "BROCCOLIF3B/USDT:USDT"
+      },
+      "SIREN/USDT": {
+        "binance": "SIREN/USDT:USDT",
+        "bybit": "SIREN/USDT:USDT"
+      },
+      "BANANAS31/USDT": {
+        "binance": "BANANAS31/USDT:USDT",
+        "bybit": "BANANAS31/USDT:USDT"
+      },
+      "BR/USDT": {
+        "binance": "BR/USDT:USDT",
+        "bybit": "BR/USDT:USDT"
+      },
+      "PLUME/USDT": {
+        "binance": "PLUME/USDT:USDT",
+        "bybit": "PLUME/USDT:USDT"
+      },
+      "NIL/USDT": {
+        "binance": "NIL/USDT:USDT",
+        "bybit": "NIL/USDT:USDT"
+      },
+      "PARTI/USDT": {
+        "binance": "PARTI/USDT:USDT",
+        "bybit": "PARTI/USDT:USDT"
+      },
+      "JELLYJELLY/USDT": {
+        "binance": "JELLYJELLY/USDT:USDT",
+        "bybit": "JELLYJELLY/USDT:USDT"
+      },
+      "MAVIA/USDT": {
+        "binance": "MAVIA/USDT:USDT",
+        "bybit": "MAVIA/USDT:USDT"
+      },
+      "PAXG/USDT": {
+        "binance": "PAXG/USDT:USDT",
+        "bybit": "PAXG/USDT:USDT"
+      },
+      "WAL/USDT": {
+        "binance": "WAL/USDT:USDT",
+        "bybit": "WAL/USDT:USDT"
+      },
+      "FUN/USDT": {
+        "binance": "FUN/USDT:USDT"
+      },
+      "MLN/USDT": {
+        "binance": "MLN/USDT:USDT",
+        "bybit": "MLN/USDT:USDT"
+      },
+      "GUN/USDT": {
+        "binance": "GUN/USDT:USDT",
+        "bybit": "GUN/USDT:USDT"
+      },
+      "ATH/USDT": {
+        "binance": "ATH/USDT:USDT",
+        "bybit": "ATH/USDT:USDT"
+      },
+      "BABY/USDT": {
+        "binance": "BABY/USDT:USDT",
+        "bybit": "BABY/USDT:USDT"
+      },
+      "FORTH/USDT": {
+        "binance": "FORTH/USDT:USDT",
+        "bybit": "FORTH/USDT:USDT"
+      },
+      "PROMPT/USDT": {
+        "binance": "PROMPT/USDT:USDT",
+        "bybit": "PROMPT/USDT:USDT"
+      },
+      "XCN/USDT": {
+        "binance": "XCN/USDT:USDT",
+        "bybit": "XCN/USDT:USDT"
+      },
+      "PUMP/USDT": {
+        "binance": "PUMP/USDT:USDT"
+      },
+      "STO/USDT": {
+        "binance": "STO/USDT:USDT",
+        "bybit": "STO/USDT:USDT"
+      },
+      "FHE/USDT": {
+        "binance": "FHE/USDT:USDT",
+        "bybit": "FHE/USDT:USDT"
+      },
+      "KERNEL/USDT": {
+        "binance": "KERNEL/USDT:USDT",
+        "bybit": "KERNEL/USDT:USDT"
+      },
+      "WCT/USDT": {
+        "binance": "WCT/USDT:USDT",
+        "bybit": "WCT/USDT:USDT"
+      },
+      "INIT/USDT": {
+        "binance": "INIT/USDT:USDT",
+        "bybit": "INIT/USDT:USDT"
+      },
+      "AERGO/USDT": {
+        "binance": "AERGO/USDT:USDT",
+        "bybit": "AERGO/USDT:USDT"
+      },
+      "BANK/USDT": {
+        "binance": "BANK/USDT:USDT",
+        "bybit": "BANK/USDT:USDT"
+      },
+      "EPT/USDT": {
+        "binance": "EPT/USDT:USDT",
+        "bybit": "EPT/USDT:USDT"
+      },
+      "DEEP/USDT": {
+        "binance": "DEEP/USDT:USDT",
+        "bybit": "DEEP/USDT:USDT"
+      },
+      "HYPER/USDT": {
+        "binance": "HYPER/USDT:USDT",
+        "bybit": "HYPER/USDT:USDT"
+      },
+      "MEMEFI/USDT": {
+        "binance": "MEMEFI/USDT:USDT"
+      },
+      "FIS/USDT": {
+        "binance": "FIS/USDT:USDT"
+      },
+      "JST/USDT": {
+        "binance": "JST/USDT:USDT",
+        "bybit": "JST/USDT:USDT"
+      },
+      "SIGN/USDT": {
+        "binance": "SIGN/USDT:USDT",
+        "bybit": "SIGN/USDT:USDT"
+      },
+      "PUNDIX/USDT": {
+        "binance": "PUNDIX/USDT:USDT",
+        "bybit": "PUNDIX/USDT:USDT"
+      },
+      "CTK/USDT": {
+        "binance": "CTK/USDT:USDT",
+        "bybit": "CTK/USDT:USDT"
+      },
+      "AIOT/USDT": {
+        "binance": "AIOT/USDT:USDT"
+      },
+      "DOLO/USDT": {
+        "binance": "DOLO/USDT:USDT"
+      },
+      "HAEDAL/USDT": {
+        "binance": "HAEDAL/USDT:USDT",
+        "bybit": "HAEDAL/USDT:USDT"
+      },
+      "SXT/USDT": {
+        "binance": "SXT/USDT:USDT",
+        "bybit": "SXT/USDT:USDT"
+      },
+      "ASR/USDT": {
+        "binance": "ASR/USDT:USDT"
+      },
+      "ALPINE/USDT": {
+        "binance": "ALPINE/USDT:USDT"
+      },
+      "B2/USDT": {
+        "binance": "B2/USDT:USDT",
+        "bybit": "B2/USDT:USDT"
+      },
+      "MILK/USDT": {
+        "binance": "MILK/USDT:USDT",
+        "bybit": "MILK/USDT:USDT"
+      },
+      "SYRUP/USDT": {
+        "binance": "SYRUP/USDT:USDT",
+        "bybit": "SYRUP/USDT:USDT"
+      },
+      "OBOL/USDT": {
+        "binance": "OBOL/USDT:USDT",
+        "bybit": "OBOL/USDT:USDT"
+      },
+      "DOOD/USDT": {
+        "binance": "DOOD/USDT:USDT",
+        "bybit": "DOOD/USDT:USDT"
+      },
+      "OG/USDT": {
+        "binance": "OG/USDT:USDT",
+        "bybit": "OG/USDT:USDT"
+      },
+      "ZKJ/USDT": {
+        "binance": "ZKJ/USDT:USDT"
+      },
+      "SKYAI/USDT": {
+        "binance": "SKYAI/USDT:USDT",
+        "bybit": "SKYAI/USDT:USDT"
+      },
+      "NXPC/USDT": {
+        "binance": "NXPC/USDT:USDT",
+        "bybit": "NXPC/USDT:USDT"
+      },
+      "CVC/USDT": {
+        "binance": "CVC/USDT:USDT",
+        "bybit": "CVC/USDT:USDT"
+      },
+      "AGT/USDT": {
+        "binance": "AGT/USDT:USDT",
+        "bybit": "AGT/USDT:USDT"
+      },
+      "AWE/USDT": {
+        "binance": "AWE/USDT:USDT",
+        "bybit": "AWE/USDT:USDT"
+      },
+      "B/USDT": {
+        "binance": "B/USDT:USDT",
+        "bybit": "B/USDT:USDT"
+      },
+      "SOON/USDT": {
+        "binance": "SOON/USDT:USDT",
+        "bybit": "SOON/USDT:USDT"
+      },
+      "HUMA/USDT": {
+        "binance": "HUMA/USDT:USDT",
+        "bybit": "HUMA/USDT:USDT"
+      },
+      "A/USDT": {
+        "binance": "A/USDT:USDT",
+        "bybit": "A/USDT:USDT"
+      },
+      "SOPH/USDT": {
+        "binance": "SOPH/USDT:USDT",
+        "bybit": "SOPH/USDT:USDT"
+      },
+      "MERL/USDT": {
+        "binance": "MERL/USDT:USDT",
+        "bybit": "MERL/USDT:USDT"
+      },
+      "HYPE/USDT": {
+        "binance": "HYPE/USDT:USDT",
+        "bybit": "HYPE/USDT:USDT"
+      },
+      "BDXN/USDT": {
+        "binance": "BDXN/USDT:USDT",
+        "bybit": "BDXN/USDT:USDT"
+      },
+      "PUFFER/USDT": {
+        "binance": "PUFFER/USDT:USDT",
+        "bybit": "PUFFER/USDT:USDT"
+      },
+      "PORT3/USDT": {
+        "binance": "PORT3/USDT:USDT"
+      },
+      "1000000BOB/USDT": {
+        "binance": "1000000BOB/USDT:USDT"
+      },
+      "LA/USDT": {
+        "binance": "LA/USDT:USDT",
+        "bybit": "LA/USDT:USDT"
+      },
+      "SKATE/USDT": {
+        "binance": "SKATE/USDT:USDT",
+        "bybit": "SKATE/USDT:USDT"
+      },
+      "HOME/USDT": {
+        "binance": "HOME/USDT:USDT",
+        "bybit": "HOME/USDT:USDT"
+      },
+      "RESOLV/USDT": {
+        "binance": "RESOLV/USDT:USDT",
+        "bybit": "RESOLV/USDT:USDT"
+      },
+      "TAIKO/USDT": {
+        "binance": "TAIKO/USDT:USDT",
+        "bybit": "TAIKO/USDT:USDT"
+      },
+      "SQD/USDT": {
+        "binance": "SQD/USDT:USDT",
+        "bybit": "SQD/USDT:USDT"
+      },
+      "PUMPBTC/USDT": {
+        "binance": "PUMPBTC/USDT:USDT",
+        "bybit": "PUMPBTC/USDT:USDT"
+      },
+      "SPK/USDT": {
+        "binance": "SPK/USDT:USDT",
+        "bybit": "SPK/USDT:USDT"
+      },
+      "MYX/USDT": {
+        "binance": "MYX/USDT:USDT"
+      },
+      "F/USDT": {
+        "binance": "F/USDT:USDT",
+        "bybit": "F/USDT:USDT"
+      },
+      "NEWT/USDT": {
+        "binance": "NEWT/USDT:USDT",
+        "bybit": "NEWT/USDT:USDT"
+      },
+      "DMC/USDT": {
+        "binance": "DMC/USDT:USDT"
+      },
+      "H/USDT": {
+        "binance": "H/USDT:USDT",
+        "bybit": "H/USDT:USDT"
+      },
+      "OL/USDT": {
+        "binance": "OL/USDT:USDT",
+        "bybit": "OL/USDT:USDT"
+      },
+      "SAHARA/USDT": {
+        "binance": "SAHARA/USDT:USDT",
+        "bybit": "SAHARA/USDT:USDT"
+      },
+      "1000000BABYDOGE/USDT": {
+        "bybit": "1000000BABYDOGE/USDT:USDT"
+      },
+      "1000000CHEEMS/USDT": {
+        "bybit": "1000000CHEEMS/USDT:USDT"
+      },
+      "1000000PEIPEI/USDT": {
+        "bybit": "1000000PEIPEI/USDT:USDT"
+      },
+      "10000COQ/USDT": {
+        "bybit": "10000COQ/USDT:USDT"
+      },
+      "10000ELON/USDT": {
+        "bybit": "10000ELON/USDT:USDT"
+      },
+      "10000LADYS/USDT": {
+        "bybit": "10000LADYS/USDT:USDT"
+      },
+      "10000QUBIC/USDT": {
+        "bybit": "10000QUBIC/USDT:USDT"
+      },
+      "10000SATS/USDT": {
+        "bybit": "10000SATS/USDT:USDT"
+      },
+      "10000WEN/USDT": {
+        "bybit": "10000WEN/USDT:USDT"
+      },
+      "10000WHY/USDT": {
+        "bybit": "10000WHY/USDT:USDT"
+      },
+      "1000APU/USDT": {
+        "bybit": "1000APU/USDT:USDT"
+      },
+      "1000BTT/USDT": {
+        "bybit": "1000BTT/USDT:USDT"
+      },
+      "1000CATS/USDT": {
+        "bybit": "1000CATS/USDT:USDT"
+      },
+      "1000NEIROCTO/USDT": {
+        "bybit": "1000NEIROCTO/USDT:USDT"
+      },
+      "1000TOSHI/USDT": {
+        "bybit": "1000TOSHI/USDT:USDT"
+      },
+      "1000TURBO/USDT": {
+        "bybit": "1000TURBO/USDT:USDT"
+      },
+      "A8/USDT": {
+        "bybit": "A8/USDT:USDT"
+      },
+      "AGI/USDT": {
+        "bybit": "AGI/USDT:USDT"
+      },
+      "AIOZ/USDT": {
+        "bybit": "AIOZ/USDT:USDT"
+      },
+      "ALEO/USDT": {
+        "bybit": "ALEO/USDT:USDT"
+      },
+      "ALU/USDT": {
+        "bybit": "ALU/USDT:USDT"
+      },
+      "AUDIO/USDT": {
+        "bybit": "AUDIO/USDT:USDT"
+      },
+      "AVAIL/USDT": {
+        "bybit": "AVAIL/USDT:USDT"
+      },
+      "AVL/USDT": {
+        "bybit": "AVL/USDT:USDT"
+      },
+      "BEAM/USDT": {
+        "bybit": "BEAM/USDT:USDT"
+      },
+      "BLAST/USDT": {
+        "bybit": "BLAST/USDT:USDT"
+      },
+      "BOBA/USDT": {
+        "bybit": "BOBA/USDT:USDT"
+      },
+      "BROCCOLI/USDT": {
+        "bybit": "BROCCOLI/USDT:USDT"
+      },
+      "CARV/USDT": {
+        "bybit": "CARV/USDT:USDT"
+      },
+      "CLANKER/USDT": {
+        "bybit": "CLANKER/USDT:USDT"
+      },
+      "CLOUD/USDT": {
+        "bybit": "CLOUD/USDT:USDT"
+      },
+      "COOK/USDT": {
+        "bybit": "COOK/USDT:USDT"
+      },
+      "CORE/USDT": {
+        "bybit": "CORE/USDT:USDT"
+      },
+      "CPOOL/USDT": {
+        "bybit": "CPOOL/USDT:USDT"
+      },
+      "CRO/USDT": {
+        "bybit": "CRO/USDT:USDT"
+      },
+      "CTC/USDT": {
+        "bybit": "CTC/USDT:USDT"
+      },
+      "CUDIS/USDT": {
+        "bybit": "CUDIS/USDT:USDT"
+      },
+      "DARK/USDT": {
+        "bybit": "DARK/USDT:USDT"
+      },
+      "DBR/USDT": {
+        "bybit": "DBR/USDT:USDT"
+      },
+      "DODO/USDT": {
+        "bybit": "DODO/USDT:USDT"
+      },
+      "DOG/USDT": {
+        "bybit": "DOG/USDT:USDT"
+      },
+      "DUCK/USDT": {
+        "bybit": "DUCK/USDT:USDT"
+      },
+      "ELX/USDT": {
+        "bybit": "ELX/USDT:USDT"
+      },
+      "ETHBTC/USDT": {
+        "bybit": "ETHBTC/USDT:USDT"
+      },
+      "FB/USDT": {
+        "bybit": "FB/USDT:USDT"
+      },
+      "FLOCK/USDT": {
+        "bybit": "FLOCK/USDT:USDT"
+      },
+      "FLR/USDT": {
+        "bybit": "FLR/USDT:USDT"
+      },
+      "FUEL/USDT": {
+        "bybit": "FUEL/USDT:USDT"
+      },
+      "FWOG/USDT": {
+        "bybit": "FWOG/USDT:USDT"
+      },
+      "GIGA/USDT": {
+        "bybit": "GIGA/USDT:USDT"
+      },
+      "GNO/USDT": {
+        "bybit": "GNO/USDT:USDT"
+      },
+      "GODS/USDT": {
+        "bybit": "GODS/USDT:USDT"
+      },
+      "GORK/USDT": {
+        "bybit": "GORK/USDT:USDT"
+      },
+      "HNT/USDT": {
+        "bybit": "HNT/USDT:USDT"
+      },
+      "HPOS10I/USDT": {
+        "bybit": "HPOS10I/USDT:USDT"
+      },
+      "J/USDT": {
+        "bybit": "J/USDT:USDT"
+      },
+      "L3/USDT": {
+        "bybit": "L3/USDT:USDT"
+      },
+      "LAUNCHCOIN/USDT": {
+        "bybit": "LAUNCHCOIN/USDT:USDT"
+      },
+      "LOOKS/USDT": {
+        "bybit": "LOOKS/USDT:USDT"
+      },
+      "MAJOR/USDT": {
+        "bybit": "MAJOR/USDT:USDT"
+      },
+      "MASA/USDT": {
+        "bybit": "MASA/USDT:USDT"
+      },
+      "MBL/USDT": {
+        "bybit": "MBL/USDT:USDT"
+      },
+      "MNT/USDT": {
+        "bybit": "MNT/USDT:USDT"
+      },
+      "MOBILE/USDT": {
+        "bybit": "MOBILE/USDT:USDT"
+      },
+      "MVL/USDT": {
+        "bybit": "MVL/USDT:USDT"
+      },
+      "MYRIA/USDT": {
+        "bybit": "MYRIA/USDT:USDT"
+      },
+      "NC/USDT": {
+        "bybit": "NC/USDT:USDT"
+      },
+      "NS/USDT": {
+        "bybit": "NS/USDT:USDT"
+      },
+      "OBT/USDT": {
+        "bybit": "OBT/USDT:USDT"
+      },
+      "ORDER/USDT": {
+        "bybit": "ORDER/USDT:USDT"
+      },
+      "OSMO/USDT": {
+        "bybit": "OSMO/USDT:USDT"
+      },
+      "PEAQ/USDT": {
+        "bybit": "PEAQ/USDT:USDT"
+      },
+      "PRAI/USDT": {
+        "bybit": "PRAI/USDT:USDT"
+      },
+      "PRCL/USDT": {
+        "bybit": "PRCL/USDT:USDT"
+      },
+      "PRIME/USDT": {
+        "bybit": "PRIME/USDT:USDT"
+      },
+      "PYR/USDT": {
+        "bybit": "PYR/USDT:USDT"
+      },
+      "QI/USDT": {
+        "bybit": "QI/USDT:USDT"
+      },
+      "RAYDIUM/USDT": {
+        "bybit": "RAYDIUM/USDT:USDT"
+      },
+      "REQ/USDT": {
+        "bybit": "REQ/USDT:USDT"
+      },
+      "REX/USDT": {
+        "bybit": "REX/USDT:USDT"
+      },
+      "RFC/USDT": {
+        "bybit": "RFC/USDT:USDT"
+      },
+      "ROAM/USDT": {
+        "bybit": "ROAM/USDT:USDT"
+      },
+      "RSS3/USDT": {
+        "bybit": "RSS3/USDT:USDT"
+      },
+      "SAROS/USDT": {
+        "bybit": "SAROS/USDT:USDT"
+      },
+      "SCA/USDT": {
+        "bybit": "SCA/USDT:USDT"
+      },
+      "SD/USDT": {
+        "bybit": "SD/USDT:USDT"
+      },
+      "SEND/USDT": {
+        "bybit": "SEND/USDT:USDT"
+      },
+      "SERAPH/USDT": {
+        "bybit": "SERAPH/USDT:USDT"
+      },
+      "SHIB1000/USDT": {
+        "bybit": "SHIB1000/USDT:USDT"
+      },
+      "SLF/USDT": {
+        "bybit": "SLF/USDT:USDT"
+      },
+      "SOLAYER/USDT": {
+        "bybit": "SOLAYER/USDT:USDT"
+      },
+      "SOLO/USDT": {
+        "bybit": "SOLO/USDT:USDT"
+      },
+      "SOSO/USDT": {
+        "bybit": "SOSO/USDT:USDT"
+      },
+      "SPEC/USDT": {
+        "bybit": "SPEC/USDT:USDT"
+      },
+      "SUNDOG/USDT": {
+        "bybit": "SUNDOG/USDT:USDT"
+      },
+      "SWEAT/USDT": {
+        "bybit": "SWEAT/USDT:USDT"
+      },
+      "TAI/USDT": {
+        "bybit": "TAI/USDT:USDT"
+      },
+      "TSTBSC/USDT": {
+        "bybit": "TSTBSC/USDT:USDT"
+      },
+      "USDE/USDT": {
+        "bybit": "USDE/USDT:USDT"
+      },
+      "VELO/USDT": {
+        "bybit": "VELO/USDT:USDT"
+      },
+      "VR/USDT": {
+        "bybit": "VR/USDT:USDT"
+      },
+      "XAUT/USDT": {
+        "bybit": "XAUT/USDT:USDT"
+      },
+      "XCH/USDT": {
+        "bybit": "XCH/USDT:USDT"
+      },
+      "XDC/USDT": {
+        "bybit": "XDC/USDT:USDT"
+      },
+      "XION/USDT": {
+        "bybit": "XION/USDT:USDT"
+      },
+      "XNO/USDT": {
+        "bybit": "XNO/USDT:USDT"
+      },
+      "XRD/USDT": {
+        "bybit": "XRD/USDT:USDT"
+      },
+      "XTER/USDT": {
+        "bybit": "XTER/USDT:USDT"
+      },
+      "ZBCN/USDT": {
+        "bybit": "ZBCN/USDT:USDT"
+      },
+      "ZENT/USDT": {
+        "bybit": "ZENT/USDT:USDT"
+      },
+      "ZEUS/USDT": {
+        "bybit": "ZEUS/USDT:USDT"
+      },
+      "ZORA/USDT": {
+        "bybit": "ZORA/USDT:USDT"
+      },
+      "ZRC/USDT": {
+        "bybit": "ZRC/USDT:USDT"
+      }
+    },
+    "timestamp": 1751100464.6640618,
+    "created_at": "2025-06-28T16:47:44.664061",
+    "market_type": "future",
+    "exchange": "all",
+    "symbol_count": 597
+  }
+}
