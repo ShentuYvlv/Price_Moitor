@@ -269,88 +269,162 @@ class NewsVolatilityAnalyzerOptimized:
         return unified_symbols, symbol_mapping
 
     def fetch_single_symbol_data(self, symbol_info: Tuple[str, str, str, int, int]) -> Optional[Dict]:
-        """获取单个交易对的K线数据"""
+        """获取单个交易对的K线数据 - 优化版本（重试机制+超时优化）"""
         normalized_symbol, original_symbol, exchange_name, start_time, end_time = symbol_info
+        request_start_time = time.time()
+        max_retries = 2  # 最多重试2次
+        retry_delay = 1  # 重试延迟1秒
 
-        try:
-            # 确保交易所已初始化
-            if not self.exchanges_initialized:
-                self.init_exchanges()
-                
-            if exchange_name not in self.exchanges:
-                return None
-                
-            exchange = self.exchanges[exchange_name]
-            duration_minutes = (end_time - start_time) // (60 * 1000)
-            limit = min(duration_minutes + 10, 200)
-
-            # 获取K线数据
-            klines = exchange.fetch_ohlcv(
-                symbol=original_symbol,
-                timeframe='1m',
-                since=start_time,
-                limit=limit
-            )
-
-            # 过滤时间范围
-            filtered_klines = [kline for kline in klines if start_time <= kline[0] <= end_time]
-
-            if not filtered_klines:
-                return None
-
-            # 获取24小时交易量
-            volume_24h = 0
+        for attempt in range(max_retries + 1):
             try:
-                ticker = exchange.fetch_ticker(original_symbol)
-                # 优先使用quoteVolume（USDT价值），如果没有则使用baseVolume
-                quote_volume = ticker.get('quoteVolume', 0)
-                base_volume = ticker.get('baseVolume', 0)
-                volume_24h = quote_volume or base_volume or 0
-            except:
-                pass
+                # 确保交易所已初始化
+                if not self.exchanges_initialized:
+                    self.init_exchanges()
 
-            # 获取持仓量（期货市场）
-            open_interest = 0
-            try:
-                if exchange_name in ['binance', 'bybit']:
-                    if exchange_name == "binance":
-                        exchange.options['defaultType'] = 'future'
-                    elif exchange_name == "bybit":
-                        exchange.options['defaultType'] = 'swap'
+                if exchange_name not in self.exchanges:
+                    return None
+                    
+                exchange = self.exchanges[exchange_name]
+                duration_minutes = (end_time - start_time) // (60 * 1000)
+                limit = min(duration_minutes + 10, 200)
 
-                    oi_data = exchange.fetch_open_interest(original_symbol)
-                    if oi_data:
-                        open_interest_value = oi_data.get('openInterestValue', 0)
-                        open_interest_amount = oi_data.get('openInterestAmount', 0)
-                        # 优先使用价值（USDT），如果没有则使用数量
-                        open_interest = open_interest_value or open_interest_amount or 0
-            except:
-                pass
+                # 设置更短的超时时间，避免长时间等待
+                original_timeout = exchange.timeout
+                
+                try:
+                    # 第一步：获取K线数据（设置15秒超时）
+                    exchange.timeout = 15000  # 15秒超时
+                    kline_start = time.time()
+                    klines = exchange.fetch_ohlcv(
+                        symbol=original_symbol,
+                        timeframe='1m',
+                        since=start_time,
+                        limit=limit
+                    )
+                    kline_time = time.time() - kline_start
 
-            # 计算波动率
-            news_timestamp = start_time + (end_time - start_time) // 2
-            window_minutes = (end_time - start_time) // (60 * 1000)
-            volatility_data = self.calculate_volatility(filtered_klines, news_timestamp, window_minutes)
+                    # 第二步：过滤时间范围
+                    filtered_klines = [kline for kline in klines if start_time <= kline[0] <= end_time]
 
-            if not volatility_data:
+                    if not filtered_klines:
+                        return None
+
+                    # 第三步：获取24小时交易量（8秒超时，快速失败）
+                    ticker_start = time.time()
+                    volume_24h = 0
+                    try:
+                        exchange.timeout = 8000  # 8秒超时
+                        ticker = exchange.fetch_ticker(original_symbol)
+                        quote_volume = ticker.get('quoteVolume', 0)
+                        base_volume = ticker.get('baseVolume', 0)
+                        volume_24h = quote_volume or base_volume or 0
+                    except Exception:
+                        # Ticker获取失败不影响主流程
+                        pass
+                    ticker_time = time.time() - ticker_start
+
+                    # 第四步：获取持仓量（8秒超时，快速失败）
+                    oi_start = time.time()
+                    open_interest = 0
+                    try:
+                        exchange.timeout = 8000  # 8秒超时
+                        if exchange_name in ['binance', 'bybit']:
+                            if exchange_name == "binance":
+                                exchange.options['defaultType'] = 'future'
+                            elif exchange_name == "bybit":
+                                exchange.options['defaultType'] = 'swap'
+
+                            oi_data = exchange.fetch_open_interest(original_symbol)
+                            if oi_data:
+                                open_interest_value = oi_data.get('openInterestValue', 0)
+                                open_interest_amount = oi_data.get('openInterestAmount', 0)
+                                open_interest = open_interest_value or open_interest_amount or 0
+                    except Exception:
+                        # 持仓量获取失败是常见的
+                        pass
+                    oi_time = time.time() - oi_start
+
+                    # 第五步：计算波动率
+                    calc_start = time.time()
+                    news_timestamp = start_time + (end_time - start_time) // 2
+                    window_minutes = (end_time - start_time) // (60 * 1000)
+                    volatility_data = self.calculate_volatility(filtered_klines, news_timestamp, window_minutes)
+                    calc_time = time.time() - calc_start
+
+                    if not volatility_data:
+                        return None
+
+                    # 计算总耗时
+                    total_time = time.time() - request_start_time
+                    
+                    # 记录慢请求（阈值降低到8秒）
+                    if total_time > 8:
+                        retry_info = f" (重试{attempt+1}次)" if attempt > 0 else ""
+                        print(f"⚠️  慢请求: {original_symbol}@{exchange_name} 耗时{total_time:.2f}s{retry_info} "
+                              f"(K线:{kline_time:.2f}s, Ticker:{ticker_time:.2f}s, "
+                              f"持仓:{oi_time:.2f}s, 计算:{calc_time:.2f}s)")
+
+                    return {
+                        'symbol': normalized_symbol,
+                        'original_symbol': original_symbol,
+                        'exchange': exchange_name,
+                        'klines': filtered_klines,
+                        'volume_24h': volume_24h,
+                        'open_interest': open_interest,
+                        'request_time': round(total_time, 3),
+                        'retry_count': attempt,  # 记录重试次数
+                        **volatility_data
+                    }
+                    
+                finally:
+                    exchange.timeout = original_timeout  # 恢复原始超时
+
+            except ccxt.NetworkError as e:
+                error_time = time.time() - request_start_time
+                if attempt < max_retries:
+                    # 还有重试机会
+                    if error_time > 10:  # 只对长时间错误显示重试信息
+                        print(f"🔄 重试{attempt+1}: {original_symbol}@{exchange_name} "
+                              f"网络错误{error_time:.1f}s，{retry_delay}秒后重试")
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    # 重试用完，记录失败
+                    if error_time > 8:
+                        print(f"🌐 网络超时: {original_symbol}@{exchange_name} {error_time:.1f}s - {str(e)[:50]}")
+                    return None
+                    
+            except ccxt.RateLimitExceeded as e:
+                error_time = time.time() - request_start_time
+                if attempt < max_retries:
+                    wait_time = (attempt + 1) * 2  # 递增等待时间
+                    print(f"🚫 API限流: {original_symbol}@{exchange_name} 等待{wait_time}秒后重试")
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    print(f"🚫 API限流: {original_symbol}@{exchange_name} {error_time:.1f}s")
+                    return None
+                    
+            except ccxt.ExchangeError:
+                # 交易所错误（如交易对不存在）- 不重试
                 return None
-
-            return {
-                'symbol': normalized_symbol,
-                'original_symbol': original_symbol,
-                'exchange': exchange_name,
-                'klines': filtered_klines,
-                'volume_24h': volume_24h,
-                'open_interest': open_interest,
-                **volatility_data
-            }
-
-        except Exception as e:
-            # 静默处理单个交易对错误
-            return None
+                
+            except Exception as e:
+                error_time = time.time() - request_start_time
+                if attempt < max_retries and error_time > 5:
+                    print(f"🔄 重试{attempt+1}: {original_symbol}@{exchange_name} "
+                          f"未知错误{error_time:.1f}s，{retry_delay}秒后重试")
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    if error_time > 5:
+                        print(f"❓ 未知错误: {original_symbol}@{exchange_name} {error_time:.1f}s - {str(e)[:30]}")
+                    return None
+                    
+        return None  # 所有重试都失败
 
     def calculate_volatility(self, klines: List[List], news_timestamp: int, window_minutes: int) -> Dict:
-        """计算价格波动指标 - 与原版本保持一致的算法"""
+        """计算价格波动指标 - 简化版本，只保留涨幅"""
         if not klines or len(klines) < window_minutes:
             return None
             
@@ -381,51 +455,24 @@ class NewsVolatilityAnalyzerOptimized:
             if len(before_data) == 0 or len(after_data) == 0:
                 return None
 
-            # 计算各种波动指标（与原版本完全一致）
+            # 计算涨跌幅指标
             # 新闻前时间段的价格数据
-            before_max_price = before_data['high'].max()      # 新闻前时间段最高价
             before_min_price = before_data['low'].min()       # 新闻前时间段最低价
-            before_close_price = before_data['close'].iloc[-1]  # 新闻前最后收盘价（作为基准价格）
+            before_max_price = before_data['high'].max()      # 新闻前时间段最高价
 
             # 新闻后时间段的价格数据
             after_max_price = after_data['high'].max()        # 新闻后时间段最高价
             after_min_price = after_data['low'].min()         # 新闻后时间段最低价
-            after_close_price = after_data['close'].iloc[-1]  # 新闻后最后收盘价
 
-            # 新闻前后的成交量对比
-            before_volume = before_data['volume'].sum()
-            after_volume = after_data['volume'].sum()
-
-            # 计算波动指标（按照原版本的逻辑）
+            # 计算涨跌幅
             # 涨幅：新闻后最高价 相对于 新闻前最低价 的涨幅
             upward_volatility = (after_max_price - before_min_price) / before_min_price * 100
-            # 跌幅：新闻后最低价 相对于 新闻前最高价 的跌幅
+            # 跌幅：新闻后最低价 相对于 新闻前最高价 的跌幅  
             downward_volatility = (after_min_price - before_max_price) / before_max_price * 100
-            # 净变化：新闻后收盘价 相对于 新闻前收盘价 的变化
-            net_change = (after_close_price - before_close_price) / before_close_price * 100
-            # 最大波动：新闻后时间段内的价格振幅
-            max_volatility = (after_max_price - after_min_price) / after_min_price * 100
-
-            # 成交量变化计算，添加异常值检测
-            if before_volume > 0:
-                volume_change = (after_volume - before_volume) / before_volume * 100
-            else:
-                volume_change = 0
 
             return {
-                'before_close_price': float(before_close_price),  # 新闻前基准价格
-                'before_max_price': float(before_max_price),      # 新闻前最高价
-                'before_min_price': float(before_min_price),      # 新闻前最低价
-                'after_max_price': float(after_max_price),        # 新闻后最高价
-                'after_min_price': float(after_min_price),        # 新闻后最低价
-                'after_close_price': float(after_close_price),    # 新闻后收盘价
                 'upward_volatility': round(upward_volatility, 2),
                 'downward_volatility': round(downward_volatility, 2),
-                'net_change': round(net_change, 2),
-                'max_volatility': round(max_volatility, 2),
-                'volume_change': round(volume_change, 2),
-                'before_volume': float(before_volume),
-                'after_volume': float(after_volume)
             }
             
         except Exception as e:
@@ -478,9 +525,21 @@ class NewsVolatilityAnalyzerOptimized:
 
         print(f"📊 准备并发处理 {len(symbol_tasks)} 个交易对...")
 
-        # 并发获取数据
+        # 并发获取数据 - 添加详细进度显示
         kline_results = []
         max_workers = min(50, len(symbol_tasks))
+        
+        # 进度统计变量
+        start_time = time.time()
+        processed = 0
+        success_count = 0
+        error_count = 0
+        last_progress_time = start_time
+        last_processed = 0
+
+        print(f"🔄 启动 {max_workers} 个并发线程开始数据获取...")
+        print(f"{'进度':<8} {'成功':<6} {'失败':<6} {'速度':<12} {'剩余时间':<10} {'当前处理':<20}")
+        print("-" * 80)
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             future_to_symbol = {
@@ -488,20 +547,75 @@ class NewsVolatilityAnalyzerOptimized:
                 for task in symbol_tasks
             }
 
-            processed = 0
             for future in as_completed(future_to_symbol):
                 processed += 1
-                if processed % 50 == 0:
-                    print(f"进度: {processed}/{len(symbol_tasks)} ({processed/len(symbol_tasks)*100:.1f}%)")
+                symbol_name = future_to_symbol[future]
+                current_time = time.time()
 
                 try:
                     result = future.result()
                     if result and result.get('klines'):
                         kline_results.append(result)
-                except Exception:
-                    pass
+                        success_count += 1
+                        status = "✅"
+                    else:
+                        error_count += 1
+                        status = "❌"
+                except Exception as e:
+                    error_count += 1
+                    status = f"❌({str(e)[:10]})"
 
-        print(f"✅ 数据获取完成，有效数据: {len(kline_results)}")
+                # 每10个或每5秒显示一次详细进度
+                time_since_last = current_time - last_progress_time
+                if processed % 10 == 0 or time_since_last >= 5:
+                    # 计算处理速度
+                    elapsed_time = current_time - start_time
+                    if elapsed_time > 0:
+                        overall_speed = processed / elapsed_time
+                        recent_speed = (processed - last_processed) / max(time_since_last, 0.1)
+                    else:
+                        overall_speed = recent_speed = 0
+                    
+                    # 估算剩余时间
+                    remaining = len(symbol_tasks) - processed
+                    if recent_speed > 0:
+                        eta_seconds = remaining / recent_speed
+                        eta_str = f"{eta_seconds:.0f}s" if eta_seconds < 60 else f"{eta_seconds/60:.1f}m"
+                    else:
+                        eta_str = "计算中"
+                    
+                    # 进度百分比
+                    progress_pct = processed / len(symbol_tasks) * 100
+                    
+                    # 显示进度信息
+                    print(f"{progress_pct:>6.1f}% {success_count:>5} {error_count:>5} "
+                          f"{recent_speed:>6.1f}/s({overall_speed:>4.1f}) {eta_str:>8} "
+                          f"{symbol_name[:18]:<18} {status}")
+                    
+                    last_progress_time = current_time
+                    last_processed = processed
+                
+                # 每50个显示一次简要进度（保持原有逻辑）
+                elif processed % 50 == 0:
+                    progress_pct = processed / len(symbol_tasks) * 100
+                    elapsed = current_time - start_time
+                    speed = processed / elapsed if elapsed > 0 else 0
+                    print(f"{progress_pct:>6.1f}% {success_count:>5} {error_count:>5} "
+                          f"{speed:>6.1f}/s        {'':>8} {'批量进度更新':<18}")
+
+        # 最终统计
+        total_time = time.time() - start_time
+        final_speed = len(symbol_tasks) / total_time if total_time > 0 else 0
+        
+        print("-" * 80)
+        print(f"✅ 数据获取完成！")
+        print(f"📊 处理统计: 总数={len(symbol_tasks)}, 成功={success_count}, 失败={error_count}")
+        print(f"⏱️  耗时统计: 总耗时={total_time:.2f}秒, 平均速度={final_speed:.2f}个/秒")
+        print(f"📈 成功率: {success_count/len(symbol_tasks)*100:.1f}%")
+        
+        # 如果失败率过高，给出提示
+        if error_count / len(symbol_tasks) > 0.3:
+            print(f"⚠️  失败率较高({error_count/len(symbol_tasks)*100:.1f}%)，可能存在网络问题或API限制")
 
         return {
             'market_type': market_type,
@@ -549,33 +663,22 @@ class NewsVolatilityAnalyzerOptimized:
 
     def generate_analysis_report(self, exchange_results: Dict, all_data: List[Dict],
                                news_time: str, window_minutes: int, actual_time_range: Dict = None) -> Dict:
-        """生成分析报告"""
+        """生成分析报告 - 简化版本"""
         if not all_data:
             return {
                 'error': '没有获取到有效数据',
                 'total_symbols': 0
             }
 
-        # 按不同指标排序（与原版本保持一致）
+        # 按涨跌幅排序
         top_gainers = sorted(all_data, key=lambda x: x.get('upward_volatility', 0), reverse=True)[:20]
         top_losers = sorted(all_data, key=lambda x: x.get('downward_volatility', 0))[:20]
-        max_volatility = sorted(all_data, key=lambda x: x.get('max_volatility', 0), reverse=True)[:20]
-
-        # 成交量激增排序：过滤掉极端异常值（>10000%），避免数据噪音
-        filtered_volume_data = [item for item in all_data if 0 < item.get('volume_change', 0) < 10000]
-        volume_surge = sorted(filtered_volume_data, key=lambda x: x.get('volume_change', 0), reverse=True)[:20]
-
-        # 如果过滤后数据不足，则使用原始数据但添加警告
-        if len(volume_surge) < 10:
-            print("⚠️ 成交量数据中存在极端异常值，建议检查数据质量")
-            volume_surge = sorted(all_data, key=lambda x: x.get('volume_change', 0), reverse=True)[:20]
 
         # 计算统计数据
-        volatilities = [item.get('max_volatility', 0) for item in all_data]
-        volume_changes = [item.get('volume_change', 0) for item in all_data if item.get('volume_change', 0) != 0]
+        upward_volatilities = [item.get('upward_volatility', 0) for item in all_data]
 
-        # 统计显著波动的币种（波动超过5%）
-        significant_moves = [item for item in all_data if abs(item.get('max_volatility', 0)) > 5.0]
+        # 统计显著涨幅的币种（涨幅超过5%）
+        significant_gainers = [item for item in all_data if item.get('upward_volatility', 0) > 5.0]
 
         # 统计数据源分布
         exchange_stats = {}
@@ -604,16 +707,13 @@ class NewsVolatilityAnalyzerOptimized:
             'analysis_info': analysis_info,
             'summary_statistics': {
                 'total_symbols': len(all_data),
-                'significant_moves_count': len(significant_moves),
-                'avg_max_volatility': round(sum(volatilities) / len(volatilities), 2) if volatilities else 0,
-                'max_single_volatility': round(max(volatilities), 2) if volatilities else 0,
-                'avg_volume_change': round(sum(volume_changes) / len(volume_changes), 2) if volume_changes else 0
+                'significant_gainers_count': len(significant_gainers),
+                'avg_upward_volatility': round(sum(upward_volatilities) / len(upward_volatilities), 2) if upward_volatilities else 0,
+                'max_upward_volatility': round(max(upward_volatilities), 2) if upward_volatilities else 0,
             },
             'top_gainers': top_gainers,
             'top_losers': top_losers,
-            'max_volatility_symbols': max_volatility,
-            'volume_surge_symbols': volume_surge,
-            'significant_moves': significant_moves
+            'significant_gainers': significant_gainers
         }
 
     def print_analysis_report(self, report: Dict):
@@ -647,10 +747,9 @@ class NewsVolatilityAnalyzerOptimized:
             print(f"数据源分布: {source_info}")
 
         print(f"总交易对数: {stats['total_symbols']}")
-        print(f"显著波动数: {stats['significant_moves_count']} (波动>5%)")
-        print(f"平均最大波动: {stats['avg_max_volatility']}%")
-        print(f"最大单币波动: {stats['max_single_volatility']}%")
-        print(f"平均成交量变化: {stats['avg_volume_change']}%")
+        print(f"显著波动数: {stats['significant_gainers_count']} (波动>5%)")
+        print(f"平均最大波动: {stats['avg_upward_volatility']}%")
+        print(f"最大单币波动: {stats['max_upward_volatility']}%")
 
         # 格式化函数（与原版本保持一致）
         def format_volume(volume):
@@ -680,48 +779,31 @@ class NewsVolatilityAnalyzerOptimized:
 
         # 打印涨幅榜前10
         print(f"\n🚀 涨幅榜 TOP 10:")
-        print("-" * 120)
-        print(f"{'排名':<4} {'交易对 (交易所)':<20} {'涨幅':<8} {'最大波动':<10} {'成交量变化':<12} {'24h交易量':<12} {'持仓量':<12}")
-        print("-" * 120)
+        print("-" * 80)
+        print(f"{'排名':<4} {'交易对 (交易所)':<20} {'涨幅':<8} {'24h交易量':<12} {'持仓量':<12}")
+        print("-" * 80)
         for i, item in enumerate(report['top_gainers'][:10], 1):
             symbol_with_exchange = f"{item.get('symbol', 'N/A')} ({item.get('exchange', 'N/A').upper()})"
             volume_24h_str = format_volume(item.get('volume_24h', 0))
             open_interest_str = format_volume(item.get('open_interest', 0))
 
             print(f"{i:<4} {symbol_with_exchange:<20} "
-                  f"{item.get('upward_volatility', 0):>6.2f}% {item.get('max_volatility', 0):>8.2f}% "
-                  f"{item.get('volume_change', 0):>10.2f}% {volume_24h_str:>10} "
-                  f"{open_interest_str:>10}")
+                  f"{item.get('upward_volatility', 0):>6.2f}% "
+                  f"{volume_24h_str:>10} {open_interest_str:>10}")
 
         # 打印跌幅榜前10
         print(f"\n📉 跌幅榜 TOP 10:")
-        print("-" * 120)
-        print(f"{'排名':<4} {'交易对 (交易所)':<20} {'跌幅':<8} {'最大波动':<10} {'成交量变化':<12} {'24h交易量':<12} {'持仓量':<12}")
-        print("-" * 120)
+        print("-" * 80)
+        print(f"{'排名':<4} {'交易对 (交易所)':<20} {'跌幅':<8} {'24h交易量':<12} {'持仓量':<12}")
+        print("-" * 80)
         for i, item in enumerate(report['top_losers'][:10], 1):
             symbol_with_exchange = f"{item.get('symbol', 'N/A')} ({item.get('exchange', 'N/A').upper()})"
             volume_24h_str = format_volume(item.get('volume_24h', 0))
             open_interest_str = format_volume(item.get('open_interest', 0))
 
             print(f"{i:<4} {symbol_with_exchange:<20} "
-                  f"{item.get('downward_volatility', 0):>6.2f}% {item.get('max_volatility', 0):>8.2f}% "
-                  f"{item.get('volume_change', 0):>10.2f}% {volume_24h_str:>10} "
-                  f"{open_interest_str:>10}")
-
-        # 打印成交量激增榜前10
-        print(f"\n📊 成交量激增榜 TOP 10:")
-        print("-" * 120)
-        print(f"{'排名':<4} {'交易对 (交易所)':<20} {'成交量变化':<12} {'价格变化':<10} {'24h交易量':<12} {'持仓量':<12}")
-        print("-" * 120)
-        for i, item in enumerate(report['volume_surge_symbols'][:10], 1):
-            if item.get('volume_change', 0) > 0:  # 只显示成交量增加的
-                symbol_with_exchange = f"{item.get('symbol', 'N/A')} ({item.get('exchange', 'N/A').upper()})"
-                volume_24h_str = format_volume(item.get('volume_24h', 0))
-                open_interest_str = format_volume(item.get('open_interest', 0))
-
-                print(f"{i:<4} {symbol_with_exchange:<20} "
-                      f"{item.get('volume_change', 0):>10.2f}% {item.get('net_change', 0):>8.2f}% "
-                      f"{volume_24h_str:>10} {open_interest_str:>10}")
+                  f"{item.get('downward_volatility', 0):>6.2f}% "
+                  f"{volume_24h_str:>10} {open_interest_str:>10}")
 
     def save_report_to_file(self, report: Dict, filename: str = None):
         """保存报告到文件"""
