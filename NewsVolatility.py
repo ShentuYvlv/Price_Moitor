@@ -33,7 +33,7 @@ from utils import get_socks5_proxy, get_perpetual_symbols, get_bybit_perpetual_s
 from symbol_cache_manager import SymbolCacheManager
 
 
-class NewsVolatilityAnalyzerOptimized:
+class NewsVolatilityAnalyzer:
     """新闻事件价格波动分析器 - 优化版本"""
     
     def __init__(self):
@@ -527,7 +527,7 @@ class NewsVolatilityAnalyzerOptimized:
 
         # 并发获取数据 - 添加详细进度显示
         kline_results = []
-        max_workers = min(50, len(symbol_tasks))
+        max_workers = min(30, len(symbol_tasks))
         
         # 进度统计变量
         start_time = time.time()
@@ -596,7 +596,7 @@ class NewsVolatilityAnalyzerOptimized:
                     last_processed = processed
                 
                 # 每50个显示一次简要进度（保持原有逻辑）
-                elif processed % 50 == 0:
+                elif processed % 30 == 0:
                     progress_pct = processed / len(symbol_tasks) * 100
                     elapsed = current_time - start_time
                     speed = processed / elapsed if elapsed > 0 else 0
@@ -838,7 +838,7 @@ def main():
     args = parser.parse_args()
 
     # 创建优化版分析器
-    analyzer = NewsVolatilityAnalyzerOptimized()
+    analyzer = NewsVolatilityAnalyzer()
 
     try:
         # 执行分析
